@@ -1,0 +1,33 @@
+<section data-ng-controller="SociosController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Socios</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="socio in socios" data-ng-href="#!/socios/{{socio._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="socio.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="socio.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="socio.nombre"></h4>
+      <h4 class="list-group-item-heading" data-ng-bind="socio.dni"></h4>
+        </a>
+    </div>
+
+    <!-- <div class="">
+      <table ng-table [class="ng-table-responsive"]>
+        <tr data-ng-repeat="socio in socios">
+          <td data-title="'nombre'">{{socio.nombre}}</td>
+          <td data-title="'apellidos'">{{socio.apellidos}}</td>
+          <td data-title="'direccion'">{{socio.direccion}}</td>
+          <td data-title="'mail'">{{socio.mail}}</td>
+          <td data-title="'dni'">{{socio.dni}}</td>
+        </tr>
+      </table>
+    </div> -->
+
+    <div class="alert alert-warning text-center" data-ng-hide="!socios.$resolved || socios.length">
+    	No Socios yet, why don't you <a href="/#!/socios/create">create one</a>?
+    </div>
+</section>

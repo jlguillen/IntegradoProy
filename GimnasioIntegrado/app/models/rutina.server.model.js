@@ -10,11 +10,21 @@ var mongoose = require('mongoose'),
  * Rutina Schema
  */
 var RutinaSchema = new Schema({
-	name: {
+	nombre: {
 		type: String,
 		default: '',
-		required: 'Please fill Rutina name',
+		required: 'Introduzca un nombre de rutina',
 		trim: true
+	},
+	objetivo:{
+		type: String,
+		default: '',
+		required: 'Intruduzca el objetivo de la rutina'
+	},
+	descripction:{
+		type: String,
+		default: '',
+		required: 'Intruduzca una descripción de la rutina'
 	},
 	created: {
 		type: Date,

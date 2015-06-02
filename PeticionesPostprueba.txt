@@ -1,0 +1,48 @@
+PETICIONES POST:
+
+SOCIOS:
+========
+{
+"nombre": "Socio1",
+"dni": "12345678A",
+"apellidos": "apellido1 apellido2",
+"direccion": "calle equis",
+"mail": "mail@mailto.com",
+"password": "123"
+}
+
+{
+"nombre": "Socio2",
+"dni": "12345678A",
+"apellidos": "apellido1 apellido2",
+"direccion": "calle equis",
+"mail": "mail@mailto.com",
+"password": "123"
+}
+
+{
+"nombre": "Socio3",
+"dni": "12345678A",
+"apellidos": "apellido1 apellido2",
+"direccion": "calle equis",
+"mail": "mail@mailto.com",
+"password": "123"
+}
+
+{
+"nombre": "Socio4",
+"dni": "12345678A",
+"apellidos": "apellido1 apellido2",
+"direccion": "calle equis",
+"mail": "mail@mailto.com",
+"password": "123"
+}
+
+{
+"nombre": "Socio5",
+"dni": "12345678A",
+"apellidos": "apellido1 apellido2",
+"direccion": "calle equis",
+"mail": "mail@mailto.com",
+"password": "123"
+}
