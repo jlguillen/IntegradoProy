@@ -1,0 +1,10 @@
+{
+  "nombre": "José Luis",
+  "apellidos": "Guillén Piozza",
+  "edad": 26,
+  "login": "Selu",
+  "password": "123",
+  "direcion": "c/Falsa 123",
+  "mail": "selu@selu.com",
+  "rol": "Admin"
+}
