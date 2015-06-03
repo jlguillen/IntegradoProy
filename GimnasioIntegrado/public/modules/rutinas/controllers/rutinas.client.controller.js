@@ -25,7 +25,7 @@ angular.module('rutinas').controller('RutinasController', ['$scope', '$statePara
 
 		// Remove existing Rutina
 		$scope.remove = function(rutina) {
-			if ( rutina ) { 
+			if ( rutina ) {
 				rutina.$remove();
 
 				for (var i in $scope.rutinas) {
@@ -58,7 +58,7 @@ angular.module('rutinas').controller('RutinasController', ['$scope', '$statePara
 
 		// Find existing Rutina
 		$scope.findOne = function() {
-			$scope.rutina = Rutinas.get({ 
+			$scope.rutina = Rutinas.get({
 				rutinaId: $stateParams.rutinaId
 			});
 		};

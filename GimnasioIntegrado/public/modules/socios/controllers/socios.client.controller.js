@@ -1,9 +1,27 @@
 'use strict';
 
 // Socios controller
-angular.module('socios').controller('SociosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Socios',
-	function($scope, $stateParams, $location, Authentication, Socios) {
+angular.module('socios').controller('SociosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Socios', 'ngTableParams',
+	function($scope, $stateParams, $location, Authentication, Socios, ngTableParams) {
 		$scope.authentication = Authentication;
+
+		var settings = {
+			total: 0,
+			counts: [5, 10, 15],
+			getData: function($defer, params) {
+					Socios.get(params.url(), function(response){
+						params.total(response.total);
+						$defer.resolve(response.results);
+					});
+			}
+		};
+
+		var params = {
+			page: 1,
+			count: 5
+		};
+
+		$scope.tableParams = new ngTableParams(params, settings);
 
 		// Create new Socio
 		$scope.create = function() {
@@ -37,13 +55,13 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 		$scope.remove = function(socio) {
 			if ( socio ) {
 				socio.$remove();
-
 				for (var i in $scope.socios) {
 					if ($scope.socios [i] === socio) {
 						$scope.socios.splice(i, 1);
 					}
 				}
 			} else {
+				console.log($scope.socio);
 				$scope.socio.$remove(function() {
 					$location.path('socios');
 				});
