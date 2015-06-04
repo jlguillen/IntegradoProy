@@ -21,10 +21,24 @@ var RutinaSchema = new Schema({
 		default: '',
 		required: 'Intruduzca el objetivo de la rutina'
 	},
-	descripction:{
+	descripcion:{
 		type: String,
 		default: '',
 		required: 'Intruduzca una descripción de la rutina'
+	},
+	nSemanas:{
+		type: Number,
+		default: '',
+		required: 'Intruduzca el numero de semanas'
+	},
+	nDias:{
+		type: Number,
+		default: '',
+		required: 'Intruduzca el número de días por semana'
+	},
+	ejercicios:{
+		type: Array,
+		default: []
 	},
 	created: {
 		type: Date,

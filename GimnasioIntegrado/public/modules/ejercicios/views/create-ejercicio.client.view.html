@@ -1,6 +1,6 @@
-<section data-ng-controller="RutinasController">
+<section data-ng-controller="EjerciciosController">
     <div class="page-header">
-        <h1>New Rutina</h1>
+        <h1>New Ejercicio</h1>
     </div>
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="create()" novalidate>
@@ -9,10 +9,8 @@
                     <label class="control-label" for="name">Name</label>
                     <div class="controls">
                       <input type="text" data-ng-model="nombre" id="nombre" class="form-control" placeholder="Nombre" required>
-                      <input type="text" data-ng-model="objetivo" id="objetivo" class="form-control" placeholder="objetivo" required>
                       <input type="text" data-ng-model="descripcion" id="descripcion" class="form-control" placeholder="descripcion" required>
-                      <input type="text" data-ng-model="nSemanas" id="nSemanas" class="form-control" placeholder="nSemanas" required>
-                      <input type="text" data-ng-model="nDias" id="nDias" class="form-control" placeholder="nDias" required>
+                      <input type="text" data-ng-model="foto" id="foto" class="form-control" placeholder="foto" required>
                     </div>
                 </div>
                 <div class="form-group">

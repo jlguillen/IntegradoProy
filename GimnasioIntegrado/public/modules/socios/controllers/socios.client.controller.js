@@ -1,8 +1,8 @@
 'use strict';
 
 // Socios controller
-angular.module('socios').controller('SociosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Socios', 'ngTableParams',
-	function($scope, $stateParams, $location, Authentication, Socios, ngTableParams) {
+angular.module('socios').controller('SociosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Socios', 'ngTableParams', '$http',
+	function($scope, $stateParams, $location, Authentication, Socios, NgTableParams, $http) {
 		$scope.authentication = Authentication;
 
 		var settings = {
@@ -21,7 +21,19 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 			count: 5
 		};
 
-		$scope.tableParams = new ngTableParams(params, settings);
+		$scope.tableParams = new NgTableParams(params, settings);
+
+		$scope.mostrarRutinas = function(){
+			console.log('change!');
+			$http.get(this.cosaprueba).
+			  success(function(respuesta) {
+					$scope.paises = respuesta;
+					$scope.npaises = $scope.paises.length;
+			  }).
+			  error(function(data, status, headers, config) {
+			    console.log('Error');
+			  });
+		};
 
 		// Create new Socio
 		$scope.create = function() {
@@ -61,7 +73,6 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 					}
 				}
 			} else {
-				console.log($scope.socio);
 				$scope.socio.$remove(function() {
 					$location.path('socios');
 				});

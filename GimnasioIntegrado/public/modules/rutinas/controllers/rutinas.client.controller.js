@@ -9,7 +9,12 @@ angular.module('rutinas').controller('RutinasController', ['$scope', '$statePara
 		$scope.create = function() {
 			// Create new Rutina object
 			var rutina = new Rutinas ({
-				name: this.name
+				nombre: this.nombre,
+				objetivo: this.objetivo,
+				descripcion: this.descripcion,
+				nSemanas: this.nSemanas,
+				nDias: this.nDias,
+				ejercicios: ['ej1', 'ej2', 'ej3']
 			});
 
 			// Redirect after save
@@ -17,7 +22,12 @@ angular.module('rutinas').controller('RutinasController', ['$scope', '$statePara
 				$location.path('rutinas/' + response._id);
 
 				// Clear form fields
-				$scope.name = '';
+				$scope.nombre = '';
+				$scope.objetivo = '';
+				$scope.descripcion = '';
+				$scope.nSemanas = '';
+				$scope.nDias = '';
+				$scope.ejercicios = [];
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

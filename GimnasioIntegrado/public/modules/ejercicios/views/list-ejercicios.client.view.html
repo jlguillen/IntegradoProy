@@ -1,0 +1,25 @@
+<section data-ng-controller="EjerciciosController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Ejercicios</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="ejercicio in ejercicios" data-ng-href="#!/ejercicios/{{ejercicio._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="ejercicio.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="ejercicio.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="ejercicio.nombre"></h4>
+        <img ng-src="ejercicio.foto" alt="foto_tal"/>
+        </a>
+    </div>
+
+    <div class="" data-ng-repeat="ejercicio in ejercicios">
+      <h4 class="list-group-item-heading" data-ng-bind="ejercicio.nombre"></h4>
+      <img ng-src={{ejercicio.foto}} alt="foto_tal"/>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!ejercicios.$resolved || ejercicios.length">
+    	No Ejercicios yet, why don't you <a href="/#!/ejercicios/create">create one</a>?
+    </div>
+</section>
