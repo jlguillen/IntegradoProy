@@ -37,8 +37,8 @@ var RutinaSchema = new Schema({
 		required: 'Intruduzca el número de días por semana'
 	},
 	ejercicios:{
-		type: Array,
-		default: []
+		type: Object,
+		default: {}
 	},
 	created: {
 		type: Date,
