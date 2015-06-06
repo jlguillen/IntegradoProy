@@ -1,6 +1,6 @@
-<section data-ng-controller="SociosController" data-ng-init="findOne()">
+<section data-ng-controller="SociosController" data-ng-init="findOne(); mostrarOneRutina()">
 	<div class="page-header">
-		<h1 data-ng-bind="socio.name"></h1>
+		<h1>{{socio.nombre}} {{socio.apellidos}}</h1>
 	</div>
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == socio.user._id))">
 		<a class="btn btn-primary" href="/#!/socios/{{socio._id}}/edit">
@@ -18,4 +18,5 @@
 			<span data-ng-bind="socio.user.displayName"></span>
 		</em>
 	</small>
+	<input ng-click="mostrarOneRutina()" type="button" name="name" value="getOneRutina">
 </section>

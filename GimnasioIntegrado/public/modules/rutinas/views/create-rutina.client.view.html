@@ -10,10 +10,11 @@
                       <input type="text" data-ng-model="nombre" id="nombre" class="form-control" placeholder="Nombre" required>
                       <input type="text" data-ng-model="objetivo" id="objetivo" class="form-control" placeholder="Objetivo" required>
                       <input type="text" data-ng-model="descripcion" id="descripcion" class="form-control" placeholder="Descripcion" required>
+                      <input type="text" data-ng-model="nSemanas" id="nSemanas" class="form-control" placeholder="Número de semanas que repetirá la rutina" required>
                     </div>
 
                     <h3>Añadir ejercicios</h3>
-                    <select class="form-control" name="" data-ng-model="ejercicio" ng-options="ejercicio as ejercicio.nombre for ejercicio in ejercicios track by ejercicio._id">
+                    <select class="form-control" name="" data-ng-model="ejercicio" ng-options="ejercicio as ejercicio.nombre for ejercicio in ejercicios track by ejercicio._id" required>
                       <option value="ejercicio.nombre">{{ejercicio}}</option>
                     </select>
 
@@ -23,57 +24,32 @@
 
                 </div>
 
-                <p>
-                  Bucle de los ejercicios:
-                </p>
-                <ul>
-                  <!-- El track by $index es para poder repetir ejercicios y que no de problemas el ng-repeat -->
-                  <li data-ng-repeat="ejercicio in listaEj track by $index">{{ejercicio}}</li>
-                </ul>
+                <div class="row" ng-show="listaEj.length">
+                  <h3>Ejercicios que vas a añadir al siguiente día: </h3>
+                  <div class="col-lg-2 col-xs-4 col-md-3 ejercicios" data-ng-repeat="ejercicio in listaEj track by $index">
+                    <span>{{ejercicio.ejercicio.nombre}} - {{ejercicio.repeticiones}}</span>
+                    <img ng-src="{{ejercicio.ejercicio.foto}}" alt="foto_ejercicio" />
+                  </div>
+                </div>
 
 
 
 
-                <h3>Añadir Día</h3>
-                <input type="button" ng-click="addDia()" value="Añadir Día">
-
-
+                <h3 ng-show="listaEj.length">Añadir Día</h3>
+                <input ng-show="listaEj.length" type="button" ng-click="addDia()" value="Añadir Día">
 
                 <h3>Días añadidos</h3>
-
-                <p>
-                  Bucle de los dias:
-                </p>
-                  <ul>
-                    <li data-ng-repeat="ejercicios in dia track by $index">{{ejercicios}}</li>
-                  </ul>
-
-
-
-                <h3>Añadir Semana</h3>
-                <input type="button" ng-click="addSemana()" value="Añadir Semana">
-
-
-                <p>
-                  Bucle de las semanas:
-                </p>
-                <li data-ng-repeat="ejercicios in semanas track by $index">{{ejercicios}}</li>
-
-
-
-
-
-
-
-
-
-
-
-
+                <div class="row" data-ng-repeat="ejercicios in dia track by $index">
+                  <h3>Día {{$index + 1}}: </h3>
+                  <div class="col-lg-2 ejercicios" data-ng-repeat="ejercicio in ejercicios track by $index">
+                    <span>{{ejercicio.ejercicio.nombre}} - {{ejercicio.repeticiones}}</span>
+                    <!-- <img ng-src="{{ejercicios.foto}}" alt="foto" /> -->
+                  </div>
+                </div>
 
 
                 <div class="form-group">
-                    <input type="submit" class="btn btn-default" value="Guardar">
+                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Guardar">
                 </div>
 
       				<div data-ng-show="error" class="text-danger">

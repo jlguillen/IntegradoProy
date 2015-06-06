@@ -5,10 +5,8 @@ angular.module('rutinas').controller('RutinasController', ['$scope', '$statePara
 	function($scope, $stateParams, $location, Authentication, Rutinas, $http) {
 		$scope.authentication = Authentication;
 		$scope.countdia = 1;
-		$scope.countsemana = 1;
 		$scope.listaEj = [];
 		$scope.dia = {};
-		$scope.semanas = {};
 
 		$scope.mostrarEjercicios = function(){
 			$http.get('/ejercicios').
@@ -16,41 +14,47 @@ angular.module('rutinas').controller('RutinasController', ['$scope', '$statePara
 					$scope.ejercicios = respuesta;
 			  }).
 			  error(function(data, status, headers, config) {
-			    console.log('Error');
+			    console.log('Error petición get /ejercicios');
 			  });
 		};
 
 		$scope.addEjercicio = function(){
-			$scope.listaEj.push({'ejercicio': this.ejercicio.nombre, 'repeticiones': this.repeticiones});
+			if(this.ejercicio && this.repeticiones){
+				$scope.listaEj.push({'ejercicio': this.ejercicio, 'repeticiones': this.repeticiones});
+			}else{
+				alert('Seleccione un ejercicio y un número de repeticiones o duración');
+			}
 			$scope.ejercicio = '';
 			$scope.repeticiones = '';
 		};
 
 		$scope.addDia = function(){
-			$scope.dia['dia' + $scope.countdia] = $scope.listaEj;
-			$scope.countdia++;
-			$scope.listaEj = [];
+			if($scope.countdia <= 7){
+				$scope.dia['dia' + $scope.countdia] = $scope.listaEj;
+				$scope.countdia++;
+				$scope.listaEj = [];
+			}else{
+				alert('Ya ha agregado 7 días');
+			}
 		};
-
-		$scope.addSemana = function(){
-			$scope.semanas['Semana' + $scope.countsemana] = $scope.dia;
-			$scope.dia = {};
-			$scope.countdia = 1;
-			$scope.countsemana++;
-
-		};
-
 
 		// Create new Rutina
 		$scope.create = function() {
-			// Create new Rutina object
+
+			//Para que no de error de object y pueda lanzar el mensaje de error del models
+			// var nSemanas, nDias;
+			// if(Object.keys($scope.semanas).length){
+			// 	// nSemanas = Object.keys($scope.semanas).length;
+			// 	nDias = Object.keys($scope.semanas.Semana1).length;
+			// }
+
 			var rutina = new Rutinas ({
 				nombre: this.nombre,
 				objetivo: this.objetivo,
 				descripcion: this.descripcion,
-				nSemanas: Object.keys($scope.semanas).length, //contar los registros del JSON
-				nDias: Object.keys($scope.semanas.Semana1).length,
-				ejercicios: $scope.semanas //tiene que ser un array así que...
+				nSemanas: this.nSemanas,
+				nDias: Object.keys($scope.dia).length || 0,
+				ejercicios: $scope.dia
 			});
 
 			// Redirect after save
@@ -63,7 +67,7 @@ angular.module('rutinas').controller('RutinasController', ['$scope', '$statePara
 				$scope.descripcion = '';
 				$scope.nSemanas = '';
 				$scope.nDias = '';
-				$scope.ejercicios = [];
+				$scope.ejercicios = {};
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

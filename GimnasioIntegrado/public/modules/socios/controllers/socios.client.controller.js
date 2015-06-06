@@ -24,14 +24,24 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 		$scope.tableParams = new NgTableParams(params, settings);
 
 		$scope.mostrarRutinas = function(){
-			console.log('change!');
-			$http.get(this.cosaprueba).
+			$http.get('/rutinas').
 			  success(function(respuesta) {
-					$scope.paises = respuesta;
-					$scope.npaises = $scope.paises.length;
+					$scope.rutinas = respuesta;
+					// console.log(respuesta);
 			  }).
 			  error(function(data, status, headers, config) {
 			    console.log('Error');
+			  });
+		};
+
+		$scope.mostrarOneRutina = function(){
+			var socio = $scope.socio;
+			$http.get('rutinas/' + socio.rutina).
+			  success(function(respuesta) {
+					$scope.rutinas = respuesta;
+			  }).
+			  error(function(data, status, headers, config) {
+			    console.log('Error OneRutina');
 			  });
 		};
 
@@ -44,7 +54,8 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 				dni: this.dni,
 				direccion: this.direccion,
 				mail: this.mail,
-				password: this.dni
+				password: this.dni,
+				telefono: this.telefono
 			});
 
 			// Redirect after save
@@ -82,7 +93,6 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 		// Update existing Socio
 		$scope.update = function() {
 			var socio = $scope.socio;
-
 			socio.$update(function() {
 				$location.path('socios/' + socio._id);
 			}, function(errorResponse) {

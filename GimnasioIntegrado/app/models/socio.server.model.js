@@ -41,6 +41,14 @@ var SocioSchema = new Schema({
 		type: String,
 		default: ''
 	},
+	telefono:{
+		type: String,
+		default: ''
+	},
+	rutina:{
+		type: Schema.ObjectId,
+		ref: 'Rutina'
+	},
 	created: {
 		type: Date,
 		default: Date.now

@@ -1,23 +1,41 @@
-<section data-ng-controller="SociosController" data-ng-init="findOne()">
+<section data-ng-controller="SociosController" data-ng-init="findOne(); mostrarRutinas()">
     <div class="page-header">
-        <h1>Edit Socio</h1>
+        <h1>Modificar Socio:</h1>
     </div>
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
                 <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="socio.name" id="name" class="form-control" placeholder="Name" required>
+                        <input type="text" data-ng-model="socio.nombre" id="nombre" class="form-control" placeholder="Nombre" required>
+                        <input type="text" data-ng-model="socio.apellidos" id="apellidos" class="form-control" placeholder="Apellidos" required>
+                        <input type="text" data-ng-model="socio.dni" id="dni" class="form-control" placeholder="DNI" required>
+                        <input type="text" data-ng-model="socio.direccion" id="direccion" class="form-control" placeholder="Dirección" required>
+                        <input type="text" data-ng-model="socio.mail" id="mail" class="form-control" placeholder="Mail" required>
+                        <input type="text" data-ng-model="socio.telefono" id="telefono" class="form-control" placeholder="Teléfono" required>
                     </div>
                 </div>
+                <h3>Asignar rutina: </h3>
+                <p>
+                  rutina->{{socio}}
+                </p>
+                <div class="form-group">
+                  <select class="form-control" name="" data-ng-model="socio.rutina" ng-options="rutina._id as rutina.nombre for rutina in rutinas track by rutina._id" required>
+                    <option>{{rutina.nombre}}</option>
+                  </select>
+                </div>
+
+
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">
                 </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
+
+        				<div data-ng-show="error" class="text-danger">
+        					<strong data-ng-bind="error"></strong>
+        				</div>
             </fieldset>
         </form>
+
+
     </div>
 </section>

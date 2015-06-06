@@ -10,35 +10,37 @@ var mongoose = require('mongoose'),
  * Rutina Schema
  */
 var RutinaSchema = new Schema({
-	nombre: {
-		type: String,
+//El orden lo pongo así para que cuando envíe el mensaje de error vacío del required sea en este orden (inverso)
+	nSemanas:{
+		type: Number,
 		default: '',
-		required: 'Introduzca un nombre de rutina',
-		trim: true
+		required: 'Introduzca alguna rutina de entrenamiento.'
 	},
-	objetivo:{
-		type: String,
+	nDias:{
+		type: Number,
 		default: '',
-		required: 'Intruduzca el objetivo de la rutina'
+		required: 'Introduzca alguna rutina de entrenamiento.'
+	},
+	ejercicios:{
+		type: Object,
+		default: {},
+		required: 'Introduzca algún planning de ejercicios'
 	},
 	descripcion:{
 		type: String,
 		default: '',
 		required: 'Intruduzca una descripción de la rutina'
 	},
-	nSemanas:{
-		type: Number,
+	objetivo:{
+		type: String,
 		default: '',
-		required: 'Intruduzca el numero de semanas'
+		required: 'Intruduzca el objetivo de la rutina'
 	},
-	nDias:{
-		type: Number,
+	nombre: {
+		type: String,
 		default: '',
-		required: 'Intruduzca el número de días por semana'
-	},
-	ejercicios:{
-		type: Object,
-		default: {}
+		required: 'Introduzca un nombre de rutina',
+		trim: true
 	},
 	created: {
 		type: Date,
