@@ -18,6 +18,7 @@
     <div class="" data-ng-repeat="ejercicio in ejercicios">
       <h4 class="list-group-item-heading" data-ng-bind="ejercicio.nombre"></h4>
       <img ng-src={{ejercicio.foto}} alt="foto_tal"/>
+      <h4 class="list-group-item-heading" data-ng-bind="ejercicio.descripcion"></h4>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!ejercicios.$resolved || ejercicios.length">
     	No Ejercicios yet, why don't you <a href="/#!/ejercicios/create">create one</a>?

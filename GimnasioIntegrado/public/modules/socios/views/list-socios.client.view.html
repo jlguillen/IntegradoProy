@@ -10,6 +10,7 @@
                 <td data-title="'DIRECCIÓN'" sortable="'direccion'" filter="{ 'direccion': 'text' }">{{socio.direccion}}</td>
                 <td data-title="'MAIL'" sortable="'mail'" filter="{ 'mail': 'text' }">{{socio.mail}}</td>
                 <td data-title="'DNI'" sortable="'dni'" filter="{ 'dni': 'text' }">{{socio.dni}}</td>
+                <td data-title="'RUTINA'" sortable="'rutina'" filter="{ 'rutina': 'text' }">{{socio.rutina || 'NO'}}</td>
                 <td>
                    <div class="table-actions">
                         <a class="btn btn-default" title="View" href="/#!/socios/{{socio._id}}">
@@ -23,21 +24,6 @@
             </tr>
         </table>
     </div>
-
-
-    <select ng-model="cosaprueba" ng-change="mostrarRutinas()">
-     <option value="http://restcountries.eu/rest/v1/region/africa">Africa</option>
-      <option value="http://restcountries.eu/rest/v1/region/europe">Europa</option>
-      <option value="http://restcountries.eu/rest/v1/region/americas">America</option>
-      <option value="https://restcountries.eu/rest/v1/all">TODO</option>
-    </select>
-    <div>Número de países: {{npaises}}</div>
-    <ul>
-        <li ng-repeat="pais in paises">País: <span>{{pais.name}}</span>, capital: {{pais.capital}}, población: {{pais.population}}</li>
-    </ul>
-
-
-    <!-- <input type="button" name="name" value="prueba" ng-click="mostrarRutinas();"> -->
 
     <div class="alert alert-warning text-center" data-ng-hide="!socios.$resolved || socios.length">
     	No Socios yet, why don't you <a href="/#!/socios/create">create one</a>?

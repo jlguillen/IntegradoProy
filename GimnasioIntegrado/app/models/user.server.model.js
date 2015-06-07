@@ -18,36 +18,37 @@ var validateLocalStrategyProperty = function(property) {
  * A Validation function for local strategy password
  */
 var validateLocalStrategyPassword = function(password) {
-	return (this.provider !== 'local' || (password && password.length > 6));
+	// return (this.provider !== 'local' || (password && password.length > 6));
+	return true;
 };
 
 /**
  * User Schema
  */
 var UserSchema = new Schema({
-	firstName: {
-		type: String,
-		trim: true,
-		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your first name']
-	},
-	lastName: {
-		type: String,
-		trim: true,
-		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your last name']
-	},
-	displayName: {
-		type: String,
-		trim: true
-	},
-	email: {
-		type: String,
-		trim: true,
-		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your email'],
-		match: [/.+\@.+\..+/, 'Please fill a valid email address']
-	},
+	// firstName: {
+	// 	type: String,
+	// 	trim: true,
+	// 	default: '',
+	// 	validate: [validateLocalStrategyProperty, 'Please fill in your first name']
+	// },
+	// lastName: {
+	// 	type: String,
+	// 	trim: true,
+	// 	default: '',
+	// 	validate: [validateLocalStrategyProperty, 'Please fill in your last name']
+	// },
+	// displayName: {
+	// 	type: String,
+	// 	trim: true
+	// },
+	// email: {
+	// 	type: String,
+	// 	trim: true,
+	// 	default: '',
+	// 	validate: [validateLocalStrategyProperty, 'Please fill in your email'],
+	// 	match: [/.+\@.+\..+/, 'Please fill a valid email address']
+	// },
 	username: {
 		type: String,
 		unique: 'testing error message',
@@ -58,6 +59,10 @@ var UserSchema = new Schema({
 		type: String,
 		default: '',
 		validate: [validateLocalStrategyPassword, 'Password should be longer']
+	},
+	idSocio:{
+		type: Schema.ObjectId,
+		ref: 'Socio'
 	},
 	salt: {
 		type: String
@@ -71,24 +76,24 @@ var UserSchema = new Schema({
 	roles: {
 		type: [{
 			type: String,
-			enum: ['user', 'admin']
+			enum: ['user', 'admin', 'cliente']
 		}],
 		default: ['user']
 	},
 	updated: {
 		type: Date
 	},
-	created: {
-		type: Date,
-		default: Date.now
-	},
+	// created: {
+	// 	type: Date,
+	// 	default: Date.now
+	// },
 	/* For reset password */
-	resetPasswordToken: {
-		type: String
-	},
-	resetPasswordExpires: {
-		type: Date
-	}
+	// resetPasswordToken: {
+	// 	type: String
+	// },
+	// resetPasswordExpires: {
+	// 	type: Date
+	// }
 });
 
 /**

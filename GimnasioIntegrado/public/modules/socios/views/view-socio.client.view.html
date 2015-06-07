@@ -1,14 +1,23 @@
-<section data-ng-controller="SociosController" data-ng-init="findOne(); mostrarOneRutina()">
+<section data-ng-controller="SociosController" data-ng-init="findOne()">
 	<div class="page-header">
 		<h1>{{socio.nombre}} {{socio.apellidos}}</h1>
 	</div>
-	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == socio.user._id))">
+	<!-- view en el div de abajo: data-ng-show="((authentication.user.roles[0] === 'admin') || (authentication.user.roles[0] === 'monitor'))" -->
+	 <div class="pull-right" >
 		<a class="btn btn-primary" href="/#!/socios/{{socio._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
+			<i class="glyphicon glyphicon-cog"></i>
 		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
+		<a class="btn btn-primary" data-ng-click="showDeleteLocationPopup(true, location)">
+			<i class="glyphicon glyphicon-remove-sign"></i>
 		</a>
+
+		<div class="" data-ng-show="displayLocationDeletePopup">
+	    <h6>Are you sure you want to delete this location?</h6>
+	    <div class="form-controls-alert">
+	        <a href="" class="btn" data-ng-click="showDeleteLocationPopup(false)">No</a>
+	        <a href="" class="btn btn-danger" data-ng-click="deleteVendorLocation(locationId)">Yes</a>
+	    </div>
+		</div>
 	</div>
 	<small>
 		<em class="text-muted">
@@ -18,5 +27,6 @@
 			<span data-ng-bind="socio.user.displayName"></span>
 		</em>
 	</small>
-	<input ng-click="mostrarOneRutina()" type="button" name="name" value="getOneRutina">
+	<input ng-click="mostrarOneRutina()" type="button" name="name" value="Mostrar la rutina del socio">
+
 </section>

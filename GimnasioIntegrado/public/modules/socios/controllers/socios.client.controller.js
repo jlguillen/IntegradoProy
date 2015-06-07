@@ -4,6 +4,7 @@
 angular.module('socios').controller('SociosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Socios', 'ngTableParams', '$http',
 	function($scope, $stateParams, $location, Authentication, Socios, NgTableParams, $http) {
 		$scope.authentication = Authentication;
+		// console.log($stateParams); //Aqui llega el parámetro, en este caso el id del socio
 
 		var settings = {
 			total: 0,
@@ -23,6 +24,22 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 
 		$scope.tableParams = new NgTableParams(params, settings);
 
+
+		$scope.displayLocationDeletePopup = false;
+		$scope.showDeleteLocationPopup = function(options, id) {
+		    if (options === true) {
+		        $scope.displayLocationDeletePopup = true;
+		    } else {
+		        $scope.displayLocationDeletePopup = false;
+		    }
+		    $scope.locationId = id;
+		};
+
+		$scope.deleteVendorLocation = function (storeLocation) {
+		   $scope.remove();
+		};
+
+
 		$scope.mostrarRutinas = function(){
 			$http.get('/rutinas').
 			  success(function(respuesta) {
@@ -38,7 +55,8 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 			var socio = $scope.socio;
 			$http.get('rutinas/' + socio.rutina).
 			  success(function(respuesta) {
-					$scope.rutinas = respuesta;
+					$scope.rutinaOnerutina = respuesta;
+					console.log(respuesta.nombre);
 			  }).
 			  error(function(data, status, headers, config) {
 			    console.log('Error OneRutina');
@@ -60,6 +78,24 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 
 			// Redirect after save
 			socio.$save(function(response) {
+
+				console.log(response);
+
+				var jsonUser = {
+				  'username': response.nombre,
+				  'password': response.dni,
+					'idSocio': response._id,
+				  'roles': ['cliente']
+				};
+
+				$http.post('/auth/signup', jsonUser).
+				  success(function(respuesta) {
+						console.log(respuesta);
+				  }).
+				  error(function(data, status, headers, config) {
+				    console.log('Error');
+				  });
+
 				$location.path('socios/' + response._id);
 
 				// Clear form fields
@@ -69,6 +105,7 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 				$scope.direccion = '';
 				$scope.mail = '';
 				$scope.password = '';
+
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -76,18 +113,19 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 
 		// Remove existing Socio
 		$scope.remove = function(socio) {
-			if ( socio ) {
-				socio.$remove();
-				for (var i in $scope.socios) {
-					if ($scope.socios [i] === socio) {
-						$scope.socios.splice(i, 1);
+
+				if ( socio ) {
+					socio.$remove();
+					for (var i in $scope.socios) {
+						if ($scope.socios [i] === socio) {
+							$scope.socios.splice(i, 1);
+						}
 					}
+				} else {
+					$scope.socio.$remove(function() {
+						$location.path('socios');
+					});
 				}
-			} else {
-				$scope.socio.$remove(function() {
-					$location.path('socios');
-				});
-			}
 		};
 
 		// Update existing Socio

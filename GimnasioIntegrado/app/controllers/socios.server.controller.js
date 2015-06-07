@@ -131,10 +131,11 @@ exports.socioByID = function(req, res, next, id) {
 };
 
 /**
- * Socio authorization middleware
+ * Autorización para manipular socios: Pongo necesidad de permiso de admin o monitor
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.socio.user.id !== req.user.id) {
+	//pongo la autorización de borrado por el rol
+	if (req.user.roles[0] !== 'admin') {
 		return res.status(403).send('User is not authorized');
 	}
 	next();
