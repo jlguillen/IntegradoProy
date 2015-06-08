@@ -1,4 +1,4 @@
-<section data-ng-controller="SociosController" data-ng-init="findOne(); mostrarRutinas()">
+<section data-ng-controller="SociosController" data-ng-init="findOne(); mostrarRutinas(); mostrarTarifas();">
     <div class="page-header">
         <h1>Modificar Socio:</h1>
     </div>
@@ -21,30 +21,45 @@
                         <input type="text" data-ng-model="socio.telefono" id="telefono" class="form-control" placeholder="Teléfono" required>
                     </div>
                 </div>
-                <h3>Asignar rutina: </h3>
                 <div class="form-group">
+                <h3>Asignar rutina: </h3>
                   <select class="form-control" name="" data-ng-model="socio.rutina" ng-change="mostrarOneRutina()" ng-options="rutina._id as rutina.nombre for rutina in rutinas" required>
                     <option ng-selected="rutina._id === socio.rutina"></option>
                   </select>
                 </div>
 
+                <div class="form-group">
+                <h3>Asignar tarifa: </h3>
+                  <select class="form-control" name="" data-ng-model="socio.tarifa" ng-change="mostrarOneTarifa()" ng-options="tarifa as tarifa.nombre for tarifa in tarifas" required>
+                    <option ng-selected="tarifa._id === socio.tarifa"></option>
+                  </select>
+                </div>
+
                 <div class="" ng-show="rutinaOnerutina">
                   <p>
-                    Rutina: {{rutinaOnerutina.nombre}}
+                    Nombre de rutina: {{rutinaOnerutina.nombre}}
                   </p>
                   <p>
-                    Duración en semanas: {{rutinaOnerutina.nSemanas}}
+                    Semanas: {{rutinaOnerutina.nSemanas}}
                   </p>
                   <p>
                     Días por semana: {{rutinaOnerutina.nDias}}
                   </p>
+                </div>
 
-
+                <div class="" ng-show="tarifaOnetarifa">
+                  <h3>Tarifa seleccionada: </h3>
+                  <p>
+                    Nombre de tarifa: {{tarifaOnetarifa.nombre}}
+                  </p>
+                  <p>
+                    Precio: {{tarifaOnetarifa.precio | number:2}} €
+                  </p>
                 </div>
 
 
                 <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-default">
+                    <input type="submit" value="Guardar" class="btn btn-default">
                 </div>
 
         				<div data-ng-show="error" class="text-danger">

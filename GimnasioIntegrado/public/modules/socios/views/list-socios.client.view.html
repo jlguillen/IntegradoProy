@@ -3,14 +3,16 @@
         <h1>Socios</h1>
     </div>
     <div>
-        <table ng-table="tableParams" show-filter="true">
-            <tr ng-repeat="socio in $data">
+        <table ng-table="tableParams" show-filter="true" class="table">
+            <tr ng-repeat="socio in $data" ng-class="{danger: !socio.rutina.length}">
                 <td data-title="'NOMBRE'" sortable="'nombre'" filter="{ 'nombre': 'text' }">{{socio.nombre}}</td>
                 <td data-title="'APELLIDOS'" sortable="'apellidos'" filter="{ 'apellidos': 'text' }">{{socio.apellidos}}</td>
                 <td data-title="'DIRECCIÓN'" sortable="'direccion'" filter="{ 'direccion': 'text' }">{{socio.direccion}}</td>
                 <td data-title="'MAIL'" sortable="'mail'" filter="{ 'mail': 'text' }">{{socio.mail}}</td>
                 <td data-title="'DNI'" sortable="'dni'" filter="{ 'dni': 'text' }">{{socio.dni}}</td>
-                <td data-title="'RUTINA'" sortable="'rutina'" filter="{ 'rutina': 'text' }">{{socio.rutina || 'NO'}}</td>
+                <!-- Si tiene rutina, o no;  -->
+                <td data-title="'RUTINA'" sortable="'rutina'" filter="{ 'this': 'text' }">{{socio.rutina.length ? 'Si': 'No'}}</td>
+                <!-- <td data-title="'RUTINA'" sortable="'rutina'" filter="{ 'rutina': 'text' }">{{socio.rutina.length ? 'Si': 'No'}}</td> -->
                 <td>
                    <div class="table-actions">
                         <a class="btn btn-default" title="View" href="/#!/socios/{{socio._id}}">

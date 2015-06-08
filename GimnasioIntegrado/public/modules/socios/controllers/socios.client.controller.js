@@ -4,7 +4,8 @@
 angular.module('socios').controller('SociosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Socios', 'ngTableParams', '$http',
 	function($scope, $stateParams, $location, Authentication, Socios, NgTableParams, $http) {
 		$scope.authentication = Authentication;
-		// console.log($stateParams); //Aqui llega el parámetro, en este caso el id del socio
+
+		$scope.prueba = true;
 
 		var settings = {
 			total: 0,
@@ -39,12 +40,38 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 		   $scope.remove();
 		};
 
+		$scope.mostrarTarifas = function(){
+			$http.get('/tarifas').
+			  success(function(respuesta) {
+					$scope.tarifas = respuesta;
+			  }).
+			  error(function(data, status, headers, config) {
+			    console.log('Error');
+			  });
+		};
+
+		$scope.mostrarOneTarifa = function(){
+			var socio = $scope.socio;
+			$http.get('tarifas/' + socio.tarifa._id).
+			  success(function(respuesta) {
+					var hoy = new Date();
+					$scope.tarifaOnetarifa = {
+						nombre: respuesta.nombre,
+						precio: respuesta.precio,
+						fecha_fin: hoy.setMonth(hoy.getMonth()+respuesta.duracion)
+					};
+					socio.tarifa = $scope.tarifaOnetarifa;
+			  }).
+			  error(function(data, status, headers, config) {
+			    console.log('Error OneRutina');
+			  });
+		};
+
 
 		$scope.mostrarRutinas = function(){
 			$http.get('/rutinas').
 			  success(function(respuesta) {
 					$scope.rutinas = respuesta;
-					// console.log(respuesta);
 			  }).
 			  error(function(data, status, headers, config) {
 			    console.log('Error');
@@ -56,7 +83,6 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 			$http.get('rutinas/' + socio.rutina).
 			  success(function(respuesta) {
 					$scope.rutinaOnerutina = respuesta;
-					console.log(respuesta.nombre);
 			  }).
 			  error(function(data, status, headers, config) {
 			    console.log('Error OneRutina');
@@ -79,8 +105,6 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 			// Redirect after save
 			socio.$save(function(response) {
 
-				console.log(response);
-
 				var jsonUser = {
 				  'username': response.nombre,
 				  'password': response.dni,
@@ -88,6 +112,7 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 				  'roles': ['cliente']
 				};
 
+				//Creo una cuenta de user a la misma vez que creo el Cliente
 				$http.post('/auth/signup', jsonUser).
 				  success(function(respuesta) {
 						console.log(respuesta);

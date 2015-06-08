@@ -5,99 +5,99 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
-	Ejercicio = mongoose.model('Ejercicio'),
+	Tarifa = mongoose.model('Tarifa'),
 	_ = require('lodash');
 
 /**
- * Create a Ejercicio
+ * Create a Tarifa
  */
 exports.create = function(req, res) {
-	var ejercicio = new Ejercicio(req.body);
-	ejercicio.user = req.user;
+	var tarifa = new Tarifa(req.body);
+	tarifa.user = req.user;
 
-	ejercicio.save(function(err) {
+	tarifa.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(ejercicio);
+			res.jsonp(tarifa);
 		}
 	});
 };
 
 /**
- * Show the current Ejercicio
+ * Show the current Tarifa
  */
 exports.read = function(req, res) {
-	res.jsonp(req.ejercicio);
+	res.jsonp(req.tarifa);
 };
 
 /**
- * Update a Ejercicio
+ * Update a Tarifa
  */
 exports.update = function(req, res) {
-	var ejercicio = req.ejercicio ;
+	var tarifa = req.tarifa ;
 
-	ejercicio = _.extend(ejercicio , req.body);
+	tarifa = _.extend(tarifa , req.body);
 
-	ejercicio.save(function(err) {
+	tarifa.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(ejercicio);
+			res.jsonp(tarifa);
 		}
 	});
 };
 
 /**
- * Delete an Ejercicio
+ * Delete an Tarifa
  */
 exports.delete = function(req, res) {
-	var ejercicio = req.ejercicio ;
+	var tarifa = req.tarifa ;
 
-	ejercicio.remove(function(err) {
+	tarifa.remove(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(ejercicio);
+			res.jsonp(tarifa);
 		}
 	});
 };
 
 /**
- * List of Ejercicios
+ * List of Tarifas
  */
 exports.list = function(req, res) {
-	Ejercicio.find().sort('-created').populate('user', 'displayName').exec(function(err, ejercicios) {
+	Tarifa.find().sort('-created').populate('user', 'displayName').exec(function(err, tarifas) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(ejercicios);
+			res.jsonp(tarifas);
 		}
 	});
 };
 
 /**
- * Ejercicio middleware
+ * Tarifa middleware
  */
-exports.ejercicioByID = function(req, res, next, id) {
-	Ejercicio.findById(id).populate('user', 'displayName').exec(function(err, ejercicio) {
+exports.tarifaByID = function(req, res, next, id) {
+	Tarifa.findById(id).populate('user', 'displayName').exec(function(err, tarifa) {
 		if (err) return next(err);
-		if (! ejercicio) return next(new Error('Failed to load Ejercicio ' + id));
-		req.ejercicio = ejercicio ;
+		if (! tarifa) return next(new Error('Failed to load Tarifa ' + id));
+		req.tarifa = tarifa ;
 		next();
 	});
 };
 
 /**
- * Ejercicio authorization middleware
+ * Tarifa authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
 	if (req.user.roles[0] !== 'admin' && req.user.roles[0] !== 'monitor') {

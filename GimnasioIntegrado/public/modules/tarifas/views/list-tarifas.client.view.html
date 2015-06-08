@@ -1,0 +1,69 @@
+<section data-ng-controller="TarifasController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Tarifas</h1>
+    </div>
+    <div class="list-group">
+      <!-- data-ng-href="#!/tarifas/{{tarifa._id}}/edit" -->
+        <a data-ng-repeat="tarifa in tarifas"  class="list-group-item" ng-click="mostrarDivEdit();">
+			       <h4 class="list-group-item-heading">{{tarifa.nombre}}<em class="pull-right">{{tarifa.precio | number:2}}€</em></h4>
+        </a>
+    </div>
+    <button class="btn btn-default" type="button" name="button" ng-click="mostrarDivCreate()">Nueva tarifa</button>
+    <!-- div formulario crear nueva tarifa -->
+    <div class="" ng-show="divCreate">
+      <h3>Crear nueva tarifa: </h3>
+      <div class="col-md-offset-3 col-md-6">
+          <form class="form-horizontal" data-ng-submit="create()" novalidate>
+              <fieldset>
+                  <div class="form-group">
+                      <div class="controls">
+                          <input type="text" data-ng-model="nombre" id="nombre" class="form-control" placeholder="Nombre" required>
+                          <input type="text" data-ng-model="descripcion" id="descripcion" class="form-control" placeholder="descripcion" required>
+                          <input type="number" data-ng-model="precio" id="precio" class="form-control" placeholder="precio" required>
+                          <input type="number" data-ng-model="duracion" id="duracion" class="form-control" placeholder="duracion" required>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <input type="submit" class="btn btn-default" value="Añadir tarifa">
+                  </div>
+          				<div data-ng-show="error" class="text-danger">
+          					<strong data-ng-bind="error"></strong>
+          				</div>
+              </fieldset>
+          </form>
+      </div>
+    </div>
+    <!-- div formulario editar tarifa -->
+    <div class="" ng-show="divEdit">
+      <h3>Editar tarifa: </h3>
+      <div class="col-md-offset-3 col-md-6">
+          <form class="form-horizontal" data-ng-submit="update()" novalidate>
+              <fieldset>
+                  <div class="form-group">
+                      <div class="controls">
+                            <label class="control-label block" for="nombre">Nombre:</label>
+                            <input type="text" data-ng-model="tarifaParaEditar.nombre" value="tarifaParaEditar.nombre" id="nombre" class="form-control" placeholder="nombre" required>
+                            <label class="control-label block" for="descripcion">Descripcion:</label>
+                            <input type="text" data-ng-model="tarifaParaEditar.descripcion" value="tarifaParaEditar.descripcion" id="descripcion" class="form-control" placeholder="descripcion" required>
+                            <label class="control-label block" for="precio">Precio:</label>
+                            <input type="number" data-ng-model="tarifaParaEditar.precio" value="tarifaParaEditar.precio" id="precio" class="form-control" placeholder="precio" required>
+                            <label class="control-label block" for="duracion">Duracion</label>
+                            <input type="number" data-ng-model="tarifaParaEditar.duracion" value="tarifaParaEditar.duracion" id="duracion" class="form-control" placeholder="duracion" required>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <input type="submit" value="Modificar" class="btn btn-default">
+                      <button type="button" class="btn btn-danger" name="borrar" data-ng-click="remove();">Borrar</button>
+                  </div>
+        				<div data-ng-show="error" class="text-danger">
+        					<strong data-ng-bind="error"></strong>
+        				</div>
+              </fieldset>
+          </form>
+      </div>
+    </div>
+
+    <div class="alert alert-warning text-center" data-ng-hide="!tarifas.$resolved || tarifas.length">
+    	No Tarifas yet, why don't you <a href="/#!/tarifas/create">create one</a>?
+    </div>
+</section>

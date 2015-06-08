@@ -49,6 +49,10 @@ var SocioSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'Rutina'
 	},
+	tarifa:{
+		type: Object,
+		default: {}
+	},
 	created: {
 		type: Date,
 		default: Date.now

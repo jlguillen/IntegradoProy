@@ -39,14 +39,6 @@ exports.requiresLogin = function(req, res, next) {
  */
 exports.hasAuthorization = function(roles) {
 	var _this = this;
-			console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			console.log("req.user.roles");
-			console.log(req.user.roles);
-
-			console.log("roles");
-			console.log(roles);
-			console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-
 	return function(req, res, next) {
 		_this.requiresLogin(req, res, function() {
 			if (_.intersection(req.user.roles, roles).length) {

@@ -99,7 +99,7 @@ exports.rutinaByID = function(req, res, next, id) {
  * Rutina authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.rutina.user.id !== req.user.id) {
+	if (req.user.roles[0] !== 'admin' && req.user.roles[0] !== 'monitor') {
 		return res.status(403).send('User is not authorized');
 	}
 	next();

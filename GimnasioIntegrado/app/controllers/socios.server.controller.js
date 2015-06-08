@@ -135,7 +135,7 @@ exports.socioByID = function(req, res, next, id) {
  */
 exports.hasAuthorization = function(req, res, next) {
 	//pongo la autorización de borrado por el rol
-	if (req.user.roles[0] !== 'admin') {
+	if (req.user.roles[0] !== 'admin' && req.user.roles[0] !== 'monitor') {
 		return res.status(403).send('User is not authorized');
 	}
 	next();
