@@ -16,7 +16,7 @@ angular.module('ejercicios').controller('EjerciciosController', ['$scope', '$sta
 
 			// Redirect after save
 			ejercicio.$save(function(response) {
-				$location.path('ejercicios/' + response._id);
+				$location.path('ejercicios');
 
 				// Clear form fields
 				$scope.nombre = '';
@@ -49,7 +49,7 @@ angular.module('ejercicios').controller('EjerciciosController', ['$scope', '$sta
 			var ejercicio = $scope.ejercicio;
 
 			ejercicio.$update(function() {
-				$location.path('ejercicios/' + ejercicio._id);
+				$location.path('ejercicios');
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

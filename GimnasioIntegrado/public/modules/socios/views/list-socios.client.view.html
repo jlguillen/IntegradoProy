@@ -4,14 +4,15 @@
     </div>
     <div>
         <table ng-table="tableParams" show-filter="true" class="table">
-            <tr ng-repeat="socio in $data" ng-class="{danger: !socio.rutina.length}">
+            <tr ng-repeat="socio in $data" ng-class="{danger: !socio.tarifa || socio.tarifa.fecha_fin < hoy}">
                 <td data-title="'NOMBRE'" sortable="'nombre'" filter="{ 'nombre': 'text' }">{{socio.nombre}}</td>
                 <td data-title="'APELLIDOS'" sortable="'apellidos'" filter="{ 'apellidos': 'text' }">{{socio.apellidos}}</td>
                 <td data-title="'DIRECCIÓN'" sortable="'direccion'" filter="{ 'direccion': 'text' }">{{socio.direccion}}</td>
                 <td data-title="'MAIL'" sortable="'mail'" filter="{ 'mail': 'text' }">{{socio.mail}}</td>
                 <td data-title="'DNI'" sortable="'dni'" filter="{ 'dni': 'text' }">{{socio.dni}}</td>
                 <!-- Si tiene rutina, o no;  -->
-                <td data-title="'RUTINA'" sortable="'rutina'" filter="{ 'this': 'text' }">{{socio.rutina.length ? 'Si': 'No'}}</td>
+                <td data-title="'RUTINA'" sortable="'rutina'">{{socio.rutina.length ? 'Si': 'No'}}</td>
+                <td data-title="'TARIFA'" sortable="'tarifa'">{{socio.tarifa.fecha_fin | date: 'dd/MM/yyyy'}}</td>
                 <!-- <td data-title="'RUTINA'" sortable="'rutina'" filter="{ 'rutina': 'text' }">{{socio.rutina.length ? 'Si': 'No'}}</td> -->
                 <td>
                    <div class="table-actions">
@@ -27,7 +28,5 @@
         </table>
     </div>
 
-    <div class="alert alert-warning text-center" data-ng-hide="!socios.$resolved || socios.length">
-    	No Socios yet, why don't you <a href="/#!/socios/create">create one</a>?
-    </div>
+    <a href="/#!/socios/create">Crear Socio</a>
 </section>

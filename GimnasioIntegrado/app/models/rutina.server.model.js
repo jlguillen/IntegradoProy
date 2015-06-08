@@ -41,14 +41,6 @@ var RutinaSchema = new Schema({
 		default: '',
 		required: 'Introduzca un nombre de rutina',
 		trim: true
-	},
-	created: {
-		type: Date,
-		default: Date.now
-	},
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
 	}
 });
 

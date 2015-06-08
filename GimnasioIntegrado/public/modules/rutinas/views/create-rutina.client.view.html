@@ -21,7 +21,6 @@
                     <input type="text" data-ng-model="repeticiones" placeholder="Repeticiones/minutos">
                     <input type="button" ng-click="addEjercicio()" value="Añadir">
 
-
                 </div>
 
                 <div class="row" ng-show="listaEj.length">
@@ -33,8 +32,6 @@
                 </div>
 
 
-
-
                 <h3 ng-show="listaEj.length">Añadir Día</h3>
                 <input ng-show="listaEj.length" type="button" ng-click="addDia()" value="Añadir Día">
 
@@ -43,7 +40,6 @@
                   <h3>Día {{$index + 1}}: </h3>
                   <div class="col-lg-2 ejercicios" data-ng-repeat="ejercicio in ejercicios track by $index">
                     <span>{{ejercicio.ejercicio.nombre}} - {{ejercicio.repeticiones}}</span>
-                    <!-- <img ng-src="{{ejercicios.foto}}" alt="foto" /> -->
                   </div>
                 </div>
 

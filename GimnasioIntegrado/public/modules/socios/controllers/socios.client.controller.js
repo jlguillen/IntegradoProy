@@ -6,6 +6,7 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 		$scope.authentication = Authentication;
 
 		$scope.prueba = true;
+		$scope.hoy = new Date();
 
 		var settings = {
 			total: 0,
@@ -54,11 +55,11 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 			var socio = $scope.socio;
 			$http.get('tarifas/' + socio.tarifa._id).
 			  success(function(respuesta) {
-					var hoy = new Date();
+
 					$scope.tarifaOnetarifa = {
 						nombre: respuesta.nombre,
 						precio: respuesta.precio,
-						fecha_fin: hoy.setMonth(hoy.getMonth()+respuesta.duracion)
+						fecha_fin: $scope.hoy.setMonth($scope.hoy.getMonth()+respuesta.duracion)
 					};
 					socio.tarifa = $scope.tarifaOnetarifa;
 			  }).
@@ -106,7 +107,7 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 			socio.$save(function(response) {
 
 				var jsonUser = {
-				  'username': response.nombre,
+				  'username': response.dni,
 				  'password': response.dni,
 					'idSocio': response._id,
 				  'roles': ['cliente']

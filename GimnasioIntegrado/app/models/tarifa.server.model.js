@@ -28,7 +28,6 @@ var TarifaSchema = new Schema({
 		type: Number,
 		required: 'Introduzca una duración a la tarifa',
 	}
-	// hoy.setMonth(hoy.getMonth()+3);
 });
 
 mongoose.model('Tarifa', TarifaSchema);

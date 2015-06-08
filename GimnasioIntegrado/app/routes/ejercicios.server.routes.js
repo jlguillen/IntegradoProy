@@ -6,7 +6,7 @@ module.exports = function(app) {
 
 	// Ejercicios Routes
 	app.route('/ejercicios')
-		.get(ejercicios.list)
+		.get(users.requiresLogin, ejercicios.list)
 		.post(users.requiresLogin, ejercicios.create);
 
 	app.route('/ejercicios/:ejercicioId')

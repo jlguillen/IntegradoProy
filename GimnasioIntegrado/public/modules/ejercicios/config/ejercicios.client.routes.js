@@ -13,10 +13,6 @@ angular.module('ejercicios').config(['$stateProvider',
 			url: '/ejercicios/create',
 			templateUrl: 'modules/ejercicios/views/create-ejercicio.client.view.html'
 		}).
-		state('viewEjercicio', {
-			url: '/ejercicios/:ejercicioId',
-			templateUrl: 'modules/ejercicios/views/view-ejercicio.client.view.html'
-		}).
 		state('editEjercicio', {
 			url: '/ejercicios/:ejercicioId/edit',
 			templateUrl: 'modules/ejercicios/views/edit-ejercicio.client.view.html'

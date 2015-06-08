@@ -16,10 +16,11 @@ angular.module('rutinas').config(['$stateProvider',
 		state('viewRutina', {
 			url: '/rutinas/:rutinaId',
 			templateUrl: 'modules/rutinas/views/view-rutina.client.view.html'
-		}).
-		state('editRutina', {
-			url: '/rutinas/:rutinaId/edit',
-			templateUrl: 'modules/rutinas/views/edit-rutina.client.view.html'
 		});
+		// .
+		// state('editRutina', {
+		// 	url: '/rutinas/:rutinaId/edit',
+		// 	templateUrl: 'modules/rutinas/views/edit-rutina.client.view.html'
+		// });
 	}
 ]);

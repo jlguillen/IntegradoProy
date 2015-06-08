@@ -3,8 +3,7 @@
         <h1>Tarifas</h1>
     </div>
     <div class="list-group">
-      <!-- data-ng-href="#!/tarifas/{{tarifa._id}}/edit" -->
-        <a data-ng-repeat="tarifa in tarifas"  class="list-group-item" ng-click="mostrarDivEdit();">
+        <a href="#!/tarifas" data-ng-repeat="tarifa in tarifas"  class="list-group-item" ng-click="mostrarDivEdit();">
 			       <h4 class="list-group-item-heading">{{tarifa.nombre}}<em class="pull-right">{{tarifa.precio | number:2}}€</em></h4>
         </a>
     </div>
@@ -51,9 +50,11 @@
                             <input type="number" data-ng-model="tarifaParaEditar.duracion" value="tarifaParaEditar.duracion" id="duracion" class="form-control" placeholder="duracion" required>
                       </div>
                   </div>
-                  <div class="form-group">
-                      <input type="submit" value="Modificar" class="btn btn-default">
-                      <button type="button" class="btn btn-danger" name="borrar" data-ng-click="remove();">Borrar</button>
+                  <div class="row">
+                    <div class="form-group">
+                        <input type="submit" value="Modificar" class="btn btn-default">
+                        <button type="button" class="btn btn-danger" name="borrar" data-ng-click="remove();">Borrar</button>
+                    </div>
                   </div>
         				<div data-ng-show="error" class="text-danger">
         					<strong data-ng-bind="error"></strong>

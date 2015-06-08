@@ -52,16 +52,7 @@ var SocioSchema = new Schema({
 	tarifa:{
 		type: Object,
 		default: {}
-	},
-	created: {
-		type: Date,
-		default: Date.now
-	},
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
-	},
-
+	}
 });
 
 mongoose.model('Socio', SocioSchema);

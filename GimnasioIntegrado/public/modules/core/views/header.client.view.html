@@ -9,7 +9,7 @@
 		<a href="/#!/" class="navbar-brand">gimnasioIntegrado</a>
 	</div>
 	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
-		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
+		<!-- <ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
 			<li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}" dropdown="item.menuItemType === 'dropdown'">
 				<a ng-switch-when="dropdown" class="dropdown-toggle">
 					<span data-ng-bind="item.title"></span>
@@ -22,17 +22,43 @@
 				</ul>
 				<a ng-switch-default href="/#!/{{item.link}}" data-ng-bind="item.title"></a>
 			</li>
+		</ul> -->
+
+		<!-- menú para clientes o gente sin logear -->
+		<ul class="nav navbar-nav" data-ng-show="authentication.user.roles[0] === 'cliente'">
+			<li ui-route="/tarifas" ng-class="{active: $uiRoute}">
+				<a href="/#!/tarifas">Ver tarifas</a>
+			</li>
+			<li ui-route="/actividades" ng-class="{active: $uiRoute}">
+				<a href="/#!/actividades">Horario actividades</a>
+			</li>
+			<li ui-route="/misDatos" ng-class="{active: $uiRoute}">
+				<a href="/#!/misDatos">Mis datos</a>
+			</li>
+			<li ui-route="/miRutina" ng-class="{active: $uiRoute}">
+				<a href="/#!/miRutina">Mi Rutina</a>
+			</li>
 		</ul>
 
-		<!-- <ul class="nav navbar-nav" data-ng-hide="authentication.user.roles[0] !== 'admin'">
+
+		<!-- Menú para admin -->
+		<ul class="nav navbar-nav" data-ng-show="authentication.user.roles[0] === 'admin'">
 			<li ui-route="/socios" ng-class="{active: $uiRoute}">
 				<a href="/#!/socios">Socios</a>
 			</li>
-		</ul> -->
+			<li ui-route="/tarifas" ng-class="{active: $uiRoute}">
+				<a href="/#!/tarifas">Tarifas</a>
+			</li>
+			<li ui-route="/ejercicios" ng-class="{active: $uiRoute}">
+				<a href="/#!/ejercicios">Ejercicios</a>
+			</li>
+			<li ui-route="/rutinas" ng-class="{active: $uiRoute}">
+				<a href="/#!/rutinas">Rutinas</a>
+			</li>
+		</ul>
 
 
-																													<!-- AQUI PUEDO JUGAR CON LOS ROLES -->
-		<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user.roles[0] === 'admin'">
+		<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
 			<li ui-route="/signup" ng-class="{active: $uiRoute}">
 				<a href="/#!/signup">Sign Up</a>
 			</li>
@@ -45,7 +71,7 @@
 		<ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					<span data-ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
+					<span data-ng-bind="authentication.user.username"></span> <b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu">
 					<li>

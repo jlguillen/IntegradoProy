@@ -1,21 +1,56 @@
 <section data-ng-controller="RutinasController" data-ng-init="findOne()">
 	<div class="page-header">
-		<h1 data-ng-bind="rutina.name"></h1>
+		<h1 data-ng-bind="rutina.nombre"></h1>
+		<h2>Objetivo: {{rutina.objetivo}}</h2>
+		<h2>Descripción: {{rutina.descripcion}}</h2>
 	</div>
-	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == rutina.user._id))">
+
+	<div class="row list-group" data-ng-repeat="dia in rutina.ejercicios track by $index">
+		<h4>Día {{$index+1}}</h4>
+		<h5>Ejercicios:</h5>
+
+		<div class="col-md-2" data-ng-repeat="ejercicios in dia track by $index">
+			<div class="row">
+				<div class="col-md-12">
+					<span>{{ejercicios.ejercicio.nombre}} - {{ejercicios.repeticiones}}</span>
+				</div>
+				<div class="col-md-12">
+					<img ng-src="{{ejercicios.ejercicio.foto}}" alt="foto_ejercicio"/>					
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- <div class="pull-right" data-ng-show="((authentication.user) && (authentication.user.roles[0] !== 'cliente'))">
 		<a class="btn btn-primary" href="/#!/rutinas/{{rutina._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>
 		<a class="btn btn-primary" data-ng-click="remove();">
 			<i class="glyphicon glyphicon-trash"></i>
 		</a>
-	</div>
-	<small>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="rutina.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="rutina.user.displayName"></span>
-		</em>
-	</small>
+	</div> -->
+
 </section>

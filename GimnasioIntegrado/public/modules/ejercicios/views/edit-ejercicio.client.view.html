@@ -1,22 +1,33 @@
 <section data-ng-controller="EjerciciosController" data-ng-init="findOne()">
     <div class="page-header">
-        <h1>Edit Ejercicio</h1>
+        <h1>Modificar Ejercicio</h1>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-offset-2 col-md-8">
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
                 <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
+                    <label class="control-label" for="name">Nombre</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="ejercicio.name" id="name" class="form-control" placeholder="Name" required>
+                        <input type="text" data-ng-model="ejercicio.nombre" id="name" class="form-control" placeholder="Nombre" required>
+                    </div>
+                    <label class="control-label" for="name">Descripcion</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="ejercicio.descripcion" id="name" class="form-control" placeholder="Descripcion" required>
+                    </div>
+                    <label class="control-label" for="name">Foto</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="ejercicio.foto" id="name" class="form-control" placeholder="Foto" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-default">
+                    <input type="submit" value="Guardar" class="btn btn-default">
+                    <button type="button" class="btn btn-danger" name="borrar" data-ng-click="remove();">Borrar</button>
                 </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
+
+        				<div data-ng-show="error" class="text-danger">
+        					<strong data-ng-bind="error"></strong>
+        				</div>
+
             </fieldset>
         </form>
     </div>

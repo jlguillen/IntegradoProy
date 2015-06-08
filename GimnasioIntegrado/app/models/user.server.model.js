@@ -58,7 +58,7 @@ var UserSchema = new Schema({
 	password: {
 		type: String,
 		default: '',
-		validate: [validateLocalStrategyPassword, 'Password should be longer']
+		validate: [validateLocalStrategyPassword, 'La contraseña debe ocupar al menos 6 carácteres']
 	},
 	idSocio:{
 		type: Schema.ObjectId,
@@ -76,24 +76,10 @@ var UserSchema = new Schema({
 	roles: {
 		type: [{
 			type: String,
-			enum: ['user', 'admin', 'cliente']
+			enum: ['monitor', 'admin', 'cliente']
 		}],
-		default: ['user']
-	},
-	updated: {
-		type: Date
-	},
-	// created: {
-	// 	type: Date,
-	// 	default: Date.now
-	// },
-	/* For reset password */
-	// resetPasswordToken: {
-	// 	type: String
-	// },
-	// resetPasswordExpires: {
-	// 	type: Date
-	// }
+		default: ['cliente']
+	}
 });
 
 /**
@@ -104,7 +90,6 @@ UserSchema.pre('save', function(next) {
 		this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
 		this.password = this.hashPassword(this.password);
 	}
-
 	next();
 });
 
