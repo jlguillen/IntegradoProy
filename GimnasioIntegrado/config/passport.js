@@ -27,7 +27,8 @@ module.exports = function() {
 	});
 
 	// Initialize strategies
-	config.getGlobbedFiles('./config/strategies/**/*.js').forEach(function(strategy) {
+
+	config.getGlobbedFiles('./config/strategies/**/local.js').forEach(function(strategy) {
 		require(path.resolve(strategy))();
 	});
 };

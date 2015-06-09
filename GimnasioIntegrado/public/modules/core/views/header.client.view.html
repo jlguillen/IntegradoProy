@@ -1,4 +1,5 @@
-<div class="container" data-ng-controller="HeaderController">
+<div class="container cabecera" data-ng-controller="HeaderController">
+	<!-- data-ng-init="mostrarSocioCore();" -->
 	<div class="navbar-header">
 		<button class="navbar-toggle" type="button" data-ng-click="toggleCollapsibleMenu()">
 			<span class="sr-only">Toggle navigation</span>
@@ -6,7 +7,10 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a href="/#!/" class="navbar-brand">gimnasioIntegrado</a>
+		<a href="/#!/" class="navbar-brand">
+			<!-- Gimnasio Integrado -->
+			<img alt="brand" src="modules/core/img/logointegral.png">
+		</a>
 	</div>
 	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
 		<!-- <ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
@@ -33,10 +37,11 @@
 				<a href="/#!/actividades">Horario actividades</a>
 			</li>
 			<li ui-route="/misDatos" ng-class="{active: $uiRoute}">
-				<a href="/#!/misDatos">Mis datos</a>
+				<a href="/#!/socios/{{socioUser._id}}/edit">Mis datos</a>
 			</li>
 			<li ui-route="/miRutina" ng-class="{active: $uiRoute}">
-				<a href="/#!/miRutina">Mi Rutina</a>
+				<!-- mejorable: -->
+				<a href="/#!/rutinas/{{socioUser.rutina || sinrutina}}">Mi Rutina</a>
 			</li>
 		</ul>
 
@@ -60,11 +65,11 @@
 
 		<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
 			<li ui-route="/signup" ng-class="{active: $uiRoute}">
-				<a href="/#!/signup">Sign Up</a>
+				<a href="/#!/signup">Registrarse</a>
 			</li>
 			<li class="divider-vertical"></li>
 			<li ui-route="/signin" ng-class="{active: $uiRoute}">
-				<a href="/#!/signin">Sign In</a>
+				<a href="/#!/signin">Inicie sesión</a>
 			</li>
 		</ul>
 

@@ -51,10 +51,6 @@
 	width: 130px;
 }
 
-img{
-	height: 80px;
-	width: 80px;
-}
 
 .ejercicios img{
 	width: 100%;
@@ -71,4 +67,8 @@ img{
 .ejerciciosVista  img{
 	width: 100%;
 	height: 100px;
+}
+
+header{
+	background-color: white!important;
 }

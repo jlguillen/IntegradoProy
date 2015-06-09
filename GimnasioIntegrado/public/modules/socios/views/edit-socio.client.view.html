@@ -3,6 +3,13 @@
         <h1>Modificar Socio:</h1>
     </div>
     <div class="col-md-12">
+      <div class="row" ng-show="authentication.user.roles[0] === 'cliente'">
+        <div class="cod-md-12 alert alert-danger" ng-hide="socioUser.tarifa.fecha_fin < hoy">
+          <h4 class="text-center">Es necesario renovar el pago, acuda al recepción del centro deportivo</h4>
+          <h4 class="text-center">No eres un socio activo, para activar su cuenta por favor, acuda a la recepción del centro deportivo</h4>
+        </div>
+      </div>
+
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
                 <div class="form-group">
@@ -11,8 +18,8 @@
                         <input type="text" data-ng-model="socio.nombre" id="nombre" class="form-control" placeholder="Nombre" required>
                         <label class="control-label" for="apellidos">Apellidos</label>
                         <input type="text" data-ng-model="socio.apellidos" id="apellidos" class="form-control" placeholder="Apellidos" required>
-                        <label class="control-label" for="dni">DNI</label>
-                        <input type="text" data-ng-model="socio.dni" id="dni" class="form-control" placeholder="DNI" required>
+                        <label class="control-label" for="dni" data-ng-hide="authentication.user.roles[0] === 'cliente'">DNI</label>
+                        <input type="text" data-ng-model="socio.dni" data-ng-hide="authentication.user.roles[0] === 'cliente'" id="dni" class="form-control" placeholder="DNI" required>
                         <label class="control-label" for="direccion">Dirección:</label>
                         <input type="text" data-ng-model="socio.direccion" id="direccion" class="form-control" placeholder="Dirección" required>
                         <label class="control-label" for="mail">Mail:</label>
@@ -21,14 +28,14 @@
                         <input type="text" data-ng-model="socio.telefono" id="telefono" class="form-control" placeholder="Teléfono" required>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" data-ng-hide="authentication.user.roles[0] === 'cliente'">
                 <h3>Asignar rutina: </h3>
                   <select class="form-control" name="" data-ng-model="socio.rutina" ng-change="mostrarOneRutina()" ng-options="rutina._id as rutina.nombre for rutina in rutinas" required>
                     <option ng-selected="rutina._id === socio.rutina"></option>
                   </select>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" data-ng-hide="authentication.user.roles[0] === 'cliente'">
                 <h3>Asignar tarifa: </h3>
                   <select class="form-control" name="" data-ng-model="socio.tarifa" ng-change="mostrarOneTarifa()" ng-options="tarifa as tarifa.nombre for tarifa in tarifas" required>
                     <option ng-selected="tarifa._id === socio.tarifa"></option>
@@ -58,8 +65,9 @@
                 </div>
 
 
-                <div class="form-group">
+                <div class="form-group" >
                     <input type="submit" value="Guardar" class="btn btn-default">
+                    <button type="button" class="btn btn-danger" name="borrar" data-ng-click="remove();" data-ng-hide="authentication.user.roles[0] === 'cliente'">Borrar</button>
                 </div>
 
         				<div data-ng-show="error" class="text-danger">

@@ -5,7 +5,6 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 	function($scope, $stateParams, $location, Authentication, Socios, NgTableParams, $http) {
 		$scope.authentication = Authentication;
 
-		$scope.prueba = true;
 		$scope.hoy = new Date();
 
 		var settings = {
@@ -122,7 +121,7 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 				    console.log('Error');
 				  });
 
-				$location.path('socios/' + response._id);
+				$location.path('socios');
 
 				// Clear form fields
 				$scope.nombre = '';
@@ -149,8 +148,21 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 					}
 				} else {
 					$scope.socio.$remove(function() {
+
+
+
+					// 	$http.post('/users/accounts', jsonUser).
+					// 	  success(function(respuesta) {
+					// 			console.log(respuesta);
+					// 	  }).
+					// 	  error(function(data, status, headers, config) {
+					// 	    console.log('Error');
+					// 	  });
+					//
 						$location.path('socios');
 					});
+
+
 				}
 		};
 
@@ -158,7 +170,12 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 		$scope.update = function() {
 			var socio = $scope.socio;
 			socio.$update(function() {
-				$location.path('socios/' + socio._id);
+				if($scope.authentication.user.roles[0]=== 'cliente'){
+					$location.path('/');
+				}else{
+					$location.path('socios');
+				}
+
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

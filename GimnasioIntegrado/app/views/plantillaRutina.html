@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <h3>Nombre de la rutina: {{datos.nombre}}</h3>
+    <h3>Objetivo: {{datos.objetivo}}</h3>
+    <h3>Descripcion: {{datos.descripcion}}</h3>
+    <h4>Número de días por semana: {{datos.nDias}}</h4>
+    <div class="listado">
+      {{#datos.ejercicios}}
+        <!-- <h5>Día 1:</h5> -->
+        {{#dia1}}
+          <p>
+            {{ejercicio.nombre}} - {{repeticiones}}
+            <!-- {{ejercicio.foto}} -->
+            <img href="http://www.buenasalud.net/wp-content/uploads/imagenes/flexiones400x300.jpg" alt="error" />
+          </p>
+
+          <!-- {{ejercicio.foto}} -->
+          <!-- <div class="" style="background-image: url({{ejercicio.foto}}); background-repeat: no-repeat; background-size: 200px 200px; background-position: 0% 100%;" >
+
+          </div> -->
+        {{/dia1}}
+
+        {{#dia2}}
+          {{repeticiones}}
+        {{/dia2}}
+        {{#dia3}}
+          {{repeticiones}}
+        {{/dia3}}
+        {{#dia4}}
+          {{repeticiones}}
+        {{/dia4}}
+        {{#dia5}}
+          {{repeticiones}}
+        {{/dia5}}
+        {{#dia6}}
+          {{repeticiones}}
+        {{/dia6}}
+        {{#dia7}}
+          {{repeticiones}}
+        {{/dia7}}
+      {{/datos.ejercicios}}
+    </div>
+
+
+  </body>
+</html>

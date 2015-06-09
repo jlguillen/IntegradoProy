@@ -43,13 +43,13 @@ exports.update = function(req, res) {
 		});
 	} else {
 		res.status(400).send({
-			message: 'User is not signed in'
+			message: 'El usuario no está logeado'
 		});
 	}
 };
 
 /**
- * Send User
+ * Envia la variable de sesion con el user
  */
 exports.me = function(req, res) {
 	res.json(req.user || null);

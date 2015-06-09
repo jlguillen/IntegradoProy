@@ -104,3 +104,36 @@ exports.hasAuthorization = function(req, res, next) {
 	}
 	next();
 };
+
+exports.createPDF = function(req, res, next, id) {
+
+	var PDF = require('./pdf.js');
+
+	Rutina.findById(id).exec(function(err, rutina) {
+		if (err){
+			console.log(err);
+		}else{
+
+			var myPDF = new PDF({
+				config: {
+						template: __dirname + '/../views/plantillaRutina.html'
+				},
+				datos: rutina
+			});
+
+		myPDF.renderAsPdf({
+        output: __dirname + '/../views/rutina.pdf'
+    }, function (err, data) {
+      console.log('PDF CREADO');
+			res.json(rutina);
+    });
+
+
+			//Aquí dentro llamaré a la función pdf.js
+			// res.json(rutina);
+		}
+
+
+	});
+
+};

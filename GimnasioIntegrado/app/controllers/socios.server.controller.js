@@ -134,8 +134,9 @@ exports.socioByID = function(req, res, next, id) {
  * Autorización para manipular socios: Pongo necesidad de permiso de admin o monitor
  */
 exports.hasAuthorization = function(req, res, next) {
-	//pongo la autorización de borrado por el rol
-	if (req.user.roles[0] !== 'admin' && req.user.roles[0] !== 'monitor') {
+	//Autorización: Puede editar si el _idUser = idSocio o es un admin/monitor
+	console.log((JSON.stringify(req.user.idSocio) !== JSON.stringify(req.socio._id))  || (req.user.roles[0] !== 'admin' && req.user.roles[0] !== 'monitor') );
+	if ( (JSON.stringify(req.user.idSocio) !== JSON.stringify(req.socio._id)) && (req.user.roles[0] !== 'admin' && req.user.roles[0] !== 'monitor') ) {
 		return res.status(403).send('User is not authorized');
 	}
 	next();

@@ -7,13 +7,36 @@ angular.module('rutinas').controller('RutinasController', ['$scope', '$statePara
 		$scope.countdia = 1;
 		$scope.listaEj = [];
 		$scope.dia = {};
+		$scope.socioUser = {};
+		$scope.hoy = new Date();
+
+		$scope.mostrarSocioCore = function(idSocio){
+			if(Authentication.user){
+
+				if(Authentication.user._id.length && Authentication.user.roles[0] === 'cliente'){
+
+					$http.get('/socios/' + idSocio).
+						success(function(respuesta) {
+							$scope.socioUser = respuesta;
+						}).
+						error(function(data, status, headers, config) {
+							console.log('Error petición get /socioCore desde rutinas');
+						});
+				}
+			}
+		};
+
+		$scope.$on('$stateChangeSuccess', function() {
+			$scope.mostrarSocioCore($scope.authentication.user.idSocio);
+			// console.log($scope.socioUser);
+		});
 
 		$scope.mostrarEjercicios = function(){
 			$http.get('/ejercicios').
 			  success(function(respuesta) {
 					$scope.ejercicios = respuesta;
 			  }).
-			  error(function(data, status, headers, config) {
+			  error(function(error) {
 			    console.log('Error petición get /ejercicios');
 			  });
 		};
@@ -40,14 +63,6 @@ angular.module('rutinas').controller('RutinasController', ['$scope', '$statePara
 
 		// Create new Rutina
 		$scope.create = function() {
-
-			//Para que no de error de object y pueda lanzar el mensaje de error del models
-			// var nSemanas, nDias;
-			// if(Object.keys($scope.semanas).length){
-			// 	// nSemanas = Object.keys($scope.semanas).length;
-			// 	nDias = Object.keys($scope.semanas.Semana1).length;
-			// }
-
 			var rutina = new Rutinas ({
 				nombre: this.nombre,
 				objetivo: this.objetivo,

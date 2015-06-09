@@ -9,11 +9,12 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 
 		//funcion de registro
 		$scope.signup = function() {
-			
+
 			$http.post('/auth/signup', $scope.credentials).success(function(response) {
 
 				// Si tiene éxito asignamos la respuesta al modelo global de usuarios
 				$scope.authentication.user = response;
+				
 				// y redireccionamos a home
 				$location.path('/');
 			}).error(function(response) {
@@ -29,7 +30,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				$scope.authentication.user = response;
 
 				// y redireccionamos a home
-				$location.path('/');
+					$location.path('/');
 			}).error(function(response) {
 				$scope.error = response.message;
 			});

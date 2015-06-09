@@ -1,56 +1,43 @@
 <section data-ng-controller="RutinasController" data-ng-init="findOne()">
-	<div class="page-header">
-		<h1 data-ng-bind="rutina.nombre"></h1>
-		<h2>Objetivo: {{rutina.objetivo}}</h2>
-		<h2>Descripción: {{rutina.descripcion}}</h2>
-	</div>
 
-	<div class="row list-group" data-ng-repeat="dia in rutina.ejercicios track by $index">
-		<h4>Día {{$index+1}}</h4>
-		<h5>Ejercicios:</h5>
+	<div class="row">
+		<div class="row" ng-show="authentication.user.roles[0] === 'cliente'">
+			<div class="cod-md-12 alert alert-danger" ng-hide="socioUser.tarifa.fecha_fin < hoy">
+				<h4 class="text-center">Es necesario renovar el pago, acuda al recepción del centro deportivo</h4>
+				<h4 class="text-center">No eres un socio activo, para activar su cuenta por favor, acuda a la recepción del centro deportivo</h4>
+			</div>
 
-		<div class="col-md-2" data-ng-repeat="ejercicios in dia track by $index">
-			<div class="row">
-				<div class="col-md-12">
-					<span>{{ejercicios.ejercicio.nombre}} - {{ejercicios.repeticiones}}</span>
-				</div>
-				<div class="col-md-12">
-					<img ng-src="{{ejercicios.ejercicio.foto}}" alt="foto_ejercicio"/>					
+			<div class="cod-md-12 alert alert-info" ng-hide="rutina.objetivo">
+				<h4 class="text-center">No tienes rutina asignada, póngase en contacto con su monitor</h4>
+			</div>
+		</div>
+
+		<div class="row page-header col-md-12">
+			<h1 data-ng-bind="rutina.nombre"></h1>
+			<h2 ng-show="rutina.objetivo">Objetivo: {{rutina.objetivo}}</h2>
+			<h2 ng-show="rutina.descripcion">Descripción: {{rutina.descripcion}}</h2>
+		</div>
+		<div class="row">
+			<div class="list-group col-md-offset-2 col-md-8" data-ng-repeat="dia in rutina.ejercicios track by $index">
+				<h4>Día {{$index+1}}</h4>
+				<h5>Ejercicios:</h5>
+
+				<div class="col-md-3" data-ng-repeat="ejercicios in dia track by $index">
+					<div class="row">
+						<div class="col-md-12">
+							<span>{{ejercicios.ejercicio.nombre}} - {{ejercicios.repeticiones}}</span>
+						</div>
+						<div class="col-md-12">
+							<img ng-src="{{ejercicios.ejercicio.foto}}" alt="foto_ejercicio"/>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
+	<button data-ng-show="((authentication.user.roles[0] === 'admin') || (authentication.user.roles[0] === 'monitor'))" type="button" class="btn btn-danger" name="borrar" data-ng-click="remove();">Borrar</button>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<!-- <div class="pull-right" data-ng-show="((authentication.user) && (authentication.user.roles[0] !== 'cliente'))">
-		<a class="btn btn-primary" href="/#!/rutinas/{{rutina._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div> -->
+	<br><br>
 
 </section>

@@ -25,6 +25,7 @@ var SocioSchema = new Schema({
 	dni: {
 		type: String,
 		default: '',
+		unique: 'testing error message',
 		required: 'El DNI es imprescindible'
 	},
 	direccion: {

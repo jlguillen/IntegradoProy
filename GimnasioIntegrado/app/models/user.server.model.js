@@ -52,7 +52,7 @@ var UserSchema = new Schema({
 	username: {
 		type: String,
 		unique: 'testing error message',
-		required: 'Please fill in a username',
+		required: 'El username es necesario',
 		trim: true
 	},
 	password: {
