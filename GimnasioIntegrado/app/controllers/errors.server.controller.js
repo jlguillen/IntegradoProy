@@ -8,7 +8,7 @@ var getUniqueErrorMessage = function(err) {
 
 	try {
 		var fieldName = err.err.substring(err.err.lastIndexOf('.$') + 2, err.err.lastIndexOf('_1'));
-		output = fieldName.charAt(0).toUpperCase() + fieldName.slice(1) + ' already exists';
+		output = fieldName.charAt(0).toUpperCase() + fieldName.slice(1) + ' ya existe en la base de datos';
 
 	} catch (ex) {
 		output = 'Unique field already exists';
@@ -30,7 +30,7 @@ exports.getErrorMessage = function(err) {
 				message = getUniqueErrorMessage(err);
 				break;
 			default:
-				message = 'Something went wrong';
+				message = 'Algo ha fallado';
 		}
 	} else {
 		for (var errName in err.errors) {

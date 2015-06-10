@@ -1,9 +1,8 @@
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication', '$http',
-	function($scope, Authentication, $http) {
-		// This provides Authentication context.
+angular.module('core').controller('HomeController', ['$scope', 'Authentication', '$http', '$modal',
+	function($scope, Authentication, $http, $alert) {
 		$scope.authentication = Authentication;
 
 

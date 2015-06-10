@@ -2,7 +2,7 @@
 
 	<div class="row">
 		<div class="row" ng-show="authentication.user.roles[0] === 'cliente'">
-			<div class="cod-md-12 alert alert-danger" ng-hide="socioUser.tarifa.fecha_fin < hoy">
+			<div class="cod-md-12 alert alert-danger" ng-show="socioUser.tarifa.fecha_fin < hoy">
 				<h4 class="text-center">Es necesario renovar el pago, acuda al recepción del centro deportivo</h4>
 				<h4 class="text-center">No eres un socio activo, para activar su cuenta por favor, acuda a la recepción del centro deportivo</h4>
 			</div>

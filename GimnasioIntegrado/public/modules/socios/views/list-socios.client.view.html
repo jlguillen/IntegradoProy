@@ -12,8 +12,8 @@
                 <td data-title="'DNI'" sortable="'dni'" filter="{ 'dni': 'text' }">{{socio.dni}}</td>
                 <!-- Si tiene rutina, o no;  -->
                 <td data-title="'RUTINA'" sortable="'rutina'">{{socio.rutina.length ? 'Si': 'No'}}</td>
-                <!-- <td data-title="'TARIFA'" sortable="'tarifa'">{{socio.tarifa.fecha_fin | date: 'dd/MM/yyyy'}}</td> -->
-                <td data-title="'TARIFA'" sortable="'tarifa'">{{socio.tarifa ? socio.tarifa.fecha_fin: 'No'}}</td>
+                <td data-title="'TARIFA'" sortable="'tarifa'">{{socio.tarifa.fecha_fin | date: 'dd/MM/yyyy'}}</td>
+                <!-- <td data-title="'TARIFA'" sortable="'tarifa'">{{socio.tarifa ? socio.tarifa.fecha_fin: 'No'}}</td> -->
                 <td>
                    <div class="table-actions">
                         <a class="btn btn-default" title="editar" href="/#!/socios/{{socio._id}}/edit">
