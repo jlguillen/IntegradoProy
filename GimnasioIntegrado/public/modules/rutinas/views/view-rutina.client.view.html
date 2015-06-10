@@ -1,10 +1,10 @@
-<section data-ng-controller="RutinasController" data-ng-init="findOne()">
+<section data-ng-controller="RutinasController" data-ng-init="findOne(); toDay();">
 
 	<div class="row">
 		<div class="row" ng-show="authentication.user.roles[0] === 'cliente'">
-			<div class="cod-md-12 alert alert-danger" ng-show="socioUser.tarifa.fecha_fin < hoy">
+			<div class="cod-md-12 alert alert-danger" ng-hide="socioUser.tarifa.fecha_fin > hoy">
 				<h4 class="text-center">Es necesario renovar el pago, acuda al recepción del centro deportivo</h4>
-				<h4 class="text-center">No eres un socio activo, para activar su cuenta por favor, acuda a la recepción del centro deportivo</h4>
+				<h4 class="text-center" ng-hide="socioUser.tarifa">No eres un socio activo, para activar su cuenta por favor, acuda a la recepción del centro deportivo</h4>
 			</div>
 
 			<div class="cod-md-12 alert alert-info" ng-hide="rutina.objetivo">
@@ -12,12 +12,12 @@
 			</div>
 		</div>
 
-		<div class="row page-header col-md-12">
+		<div class="row page-header col-md-12" ng-show="socioUser.tarifa.fecha_fin > hoy">
 			<h1 data-ng-bind="rutina.nombre"></h1>
 			<h2 ng-show="rutina.objetivo">Objetivo: {{rutina.objetivo}}</h2>
 			<h2 ng-show="rutina.descripcion">Descripción: {{rutina.descripcion}}</h2>
 		</div>
-		<div class="row">
+		<div class="row" ng-show="socioUser.tarifa.fecha_fin > hoy">
 			<div class="list-group col-md-offset-2 col-md-8" data-ng-repeat="dia in rutina.ejercicios track by $index">
 				<h4>Día {{$index+1}}</h4>
 				<h5>Ejercicios:</h5>
@@ -36,7 +36,7 @@
 		</div>
 	</div>
 
-	<button data-ng-click="pedirPDF(rutina._id);" type="button" name="button">Generar PDF</button>
+	<button  ng-show="socioUser.tarifa.fecha_fin > hoy" data-ng-click="pedirPDF(rutina._id);" type="button" name="button">Generar PDF</button>
 
 	<a target="_blank" href="/resources/temp/rutina.pdf" ng-show="muestraBotonPDF">Abrir PDF</a>
 

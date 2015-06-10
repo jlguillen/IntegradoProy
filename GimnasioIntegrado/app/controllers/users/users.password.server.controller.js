@@ -185,7 +185,7 @@ exports.reset = function(req, res, next) {
 };
 
 /**
- * Change Password
+ * Cambiar contraseña
  */
 exports.changePassword = function(req, res) {
 	// Init Variables
@@ -234,7 +234,7 @@ exports.changePassword = function(req, res) {
 			});
 		} else {
 			res.status(400).send({
-				message: 'Intruduzca la contraseña nueva'
+				message: 'Introduzca la contraseña nueva'
 			});
 		}
 	} else {

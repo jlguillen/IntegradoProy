@@ -5,7 +5,11 @@ angular.module('socios').controller('SociosController', ['$scope', '$stateParams
 	function($scope, $stateParams, $location, Authentication, Socios, NgTableParams, $http) {
 		$scope.authentication = Authentication;
 
-		$scope.hoy = new Date();
+
+		$scope.toDay = function(){
+			var d = new Date();
+			$scope.hoy = d.getTime();
+		};
 
 		var settings = {
 			total: 0,

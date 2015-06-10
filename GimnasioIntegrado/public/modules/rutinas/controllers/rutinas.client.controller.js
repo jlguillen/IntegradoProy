@@ -11,7 +11,11 @@ angular.module('rutinas').controller('RutinasController', ['$scope', '$statePara
 		$scope.hoy = new Date();
 		$scope.muestraBotonPDF = false;
 
-
+		$scope.toDay = function(){
+			var d = new Date();
+			$scope.hoy = d.getTime();
+		};
+		
 		/*
 		*Primero aparece un botón para pedir el pdf, y luego un enlace para verlo, una vez se haya creado.
 		*/

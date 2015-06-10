@@ -76,30 +76,12 @@ exports.signup = function(req, res) {
 				}
 
 			});
-
-
-
-
-
-
-
-
-			//con esto carga la sesion del recién registrado:
-			// console.log(user);
-
-			// req.login(user, function(err) {
-			// 	if (err) {
-			// 		res.status(400).send(err);
-			// 	} else {
-			// 		res.json(user);
-			// 	}
-			// });
 		}
 	});
 };
 
 /**
- * Signin after passport authentication
+ * Inicia sesión después de verificar por passport
  */
 exports.signin = function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
@@ -122,7 +104,7 @@ exports.signin = function(req, res, next) {
 };
 
 /**
- * Signout
+ * Desconectar
  */
 exports.signout = function(req, res) {
 	req.logout();
@@ -137,11 +119,9 @@ exports.removeOAuthProvider = function(req, res, next) {
 	var provider = req.param('provider');
 
 	if (user && provider) {
-		// Delete the additional provider
 		if (user.additionalProvidersData[provider]) {
 			delete user.additionalProvidersData[provider];
 
-			// Then tell mongoose that we've updated the additionalProvidersData field
 			user.markModified('additionalProvidersData');
 		}
 
