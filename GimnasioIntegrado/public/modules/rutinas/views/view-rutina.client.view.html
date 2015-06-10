@@ -12,12 +12,12 @@
 			</div>
 		</div>
 
-		<div class="row page-header col-md-12" ng-show="socioUser.tarifa.fecha_fin > hoy">
+		<div class="row page-header col-md-12" ng-show="socioUser.tarifa.fecha_fin > hoy || authentication.user.roles[0] === 'admin'">
 			<h1 data-ng-bind="rutina.nombre"></h1>
 			<h2 ng-show="rutina.objetivo">Objetivo: {{rutina.objetivo}}</h2>
 			<h2 ng-show="rutina.descripcion">Descripción: {{rutina.descripcion}}</h2>
 		</div>
-		<div class="row" ng-show="socioUser.tarifa.fecha_fin > hoy">
+		<div class="row" ng-show="socioUser.tarifa.fecha_fin > hoy || authentication.user.roles[0] === 'admin'">
 			<div class="list-group col-md-offset-2 col-md-8" data-ng-repeat="dia in rutina.ejercicios track by $index">
 				<h4>Día {{$index+1}}</h4>
 				<h5>Ejercicios:</h5>
@@ -36,7 +36,7 @@
 		</div>
 	</div>
 
-	<button  ng-show="socioUser.tarifa.fecha_fin > hoy" data-ng-click="pedirPDF(rutina._id);" type="button" name="button">Generar PDF</button>
+	<button  ng-show="socioUser.tarifa.fecha_fin > hoy || authentication.user.roles[0] === 'admin'" data-ng-click="pedirPDF(rutina._id);" type="button" name="button">Generar PDF</button>
 
 	<a target="_blank" href="/resources/temp/rutina.pdf" ng-show="muestraBotonPDF">Abrir PDF</a>
 

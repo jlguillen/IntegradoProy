@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Get unique error field name
+ * Error al intentar meter un valor unico repetido
  */
 var getUniqueErrorMessage = function(err) {
 	var output;

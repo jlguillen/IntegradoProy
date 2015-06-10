@@ -8,14 +8,7 @@ var mongoose = require('mongoose'),
 	crypto = require('crypto');
 
 /**
- * A Validation function for local strategy properties
- */
-var validateLocalStrategyProperty = function(property) {
-	return ((this.provider !== 'local' && !this.updated) || property.length);
-};
-
-/**
- * A Validation function for local strategy password
+ * Función para validar el password
  */
 var validateLocalStrategyPassword = function(password) {
 	// return (this.provider !== 'local' || (password && password.length > 6));
@@ -26,29 +19,6 @@ var validateLocalStrategyPassword = function(password) {
  * User Schema
  */
 var UserSchema = new Schema({
-	// firstName: {
-	// 	type: String,
-	// 	trim: true,
-	// 	default: '',
-	// 	validate: [validateLocalStrategyProperty, 'Please fill in your first name']
-	// },
-	// lastName: {
-	// 	type: String,
-	// 	trim: true,
-	// 	default: '',
-	// 	validate: [validateLocalStrategyProperty, 'Please fill in your last name']
-	// },
-	// displayName: {
-	// 	type: String,
-	// 	trim: true
-	// },
-	// email: {
-	// 	type: String,
-	// 	trim: true,
-	// 	default: '',
-	// 	validate: [validateLocalStrategyProperty, 'Please fill in your email'],
-	// 	match: [/.+\@.+\..+/, 'Please fill a valid email address']
-	// },
 	username: {
 		type: String,
 		unique: 'testing error message',
