@@ -2,48 +2,117 @@
   <head>
     <title></title>
     <meta charset="UTF-8">
+    <style>
+      body{
+        padding: 30px;
+      }
+      h1, h2{
+        text-align: center;
+      }
+      footer h3{
+        text-align: right;
+      }
+      img{
+        width: 100px;
+        height: 100px;
+      }
+
+
+
+    </style>
   </head>
   <body>
-    <h3>Nombre de la rutina: {{datos.nombre}}</h3>
+    <h1>{{datos.nombre}}</h1>
     <h3>Objetivo: {{datos.objetivo}}</h3>
     <h3>Descripcion: {{datos.descripcion}}</h3>
     <h4>Número de días por semana: {{datos.nDias}}</h4>
     <div class="listado">
       {{#datos.ejercicios}}
-        <!-- <h5>Día 1:</h5> -->
-        {{#dia1}}
-          <p>
-            {{ejercicio.nombre}} - {{repeticiones}}
-            <!-- {{ejercicio.foto}} -->
-            <img href="http://www.buenasalud.net/wp-content/uploads/imagenes/flexiones400x300.jpg" alt="error" />
-          </p>
+        <h3>Lunes: </h3>
 
-          <!-- {{ejercicio.foto}} -->
-          <!-- <div class="" style="background-image: url({{ejercicio.foto}}); background-repeat: no-repeat; background-size: 200px 200px; background-position: 0% 100%;" >
+        <div class="dia">
+          {{#dia1}}
+            <div class="ejercicio">
+              <h4>{{ejercicio.nombre}} - {{repeticiones}}</h4>
+              <img href='{{ejercicio.foto}}' alt="error" />
+              <p>{{ejercicio.descripcion}}</p>
+            </div>
+          {{/dia1}}
+        </div>
 
-          </div> -->
-        {{/dia1}}
+        <h3>Martes</h3>
+        <div class="dia">
+          {{#dia2}}
+            <div class="ejercicio">
+              <h4>{{ejercicio.nombre}} - {{repeticiones}}</h4>
+              <img href='{{ejercicio.foto}}' alt="error" />
+              <p>{{ejercicio.descripcion}}</p>
+            </div>
+          {{/dia2}}
+        </div>
 
-        {{#dia2}}
-          {{repeticiones}}
-        {{/dia2}}
-        {{#dia3}}
-          {{repeticiones}}
-        {{/dia3}}
-        {{#dia4}}
-          {{repeticiones}}
-        {{/dia4}}
-        {{#dia5}}
-          {{repeticiones}}
-        {{/dia5}}
-        {{#dia6}}
-          {{repeticiones}}
-        {{/dia6}}
-        {{#dia7}}
-          {{repeticiones}}
-        {{/dia7}}
+        <h3>Miércoles</h3>
+        <div class="dia">
+          {{#dia3}}
+            <div class="ejercicio">
+              <h4>{{ejercicio.nombre}} - {{repeticiones}}</h4>
+              <img href='{{ejercicio.foto}}' alt="error" />
+              <p>{{ejercicio.descripcion}}</p>
+            </div>
+          {{/dia3}}
+        </div>
+
+        <h3>Jueves</h3>
+        <div class="dia">
+          {{#dia4}}
+            <div class="ejercicio">
+              <h4>{{ejercicio.nombre}} - {{repeticiones}}</h4>
+              <img href='{{ejercicio.foto}}' alt="error" />
+              <p>{{ejercicio.descripcion}}</p>
+            </div>
+          {{/dia4}}
+        </div>
+
+        <h3>Viernes</h3>
+        <div class="dia">
+          {{#dia5}}
+            <div class="ejercicio">
+              <h4>{{ejercicio.nombre}} - {{repeticiones}}</h4>
+              <img href='{{ejercicio.foto}}' alt="error" />
+              <p>{{ejercicio.descripcion}}</p>
+            </div>
+          {{/dia5}}
+        </div>
+
+        <h3>Sábado</h3>
+        <div class="dia">
+          {{#dia6}}
+            <div class="ejercicio">
+              <h4>{{ejercicio.nombre}} - {{repeticiones}}</h4>
+              <img href='{{ejercicio.foto}}' alt="error" />
+              <p>{{ejercicio.descripcion}}</p>
+            </div>
+          {{/dia6}}
+        </div>
+
+        <h3>Domingo</h3>
+        <div class="dia">
+          {{#dia7}}
+            <div class="ejercicio">
+              <h4>{{ejercicio.nombre}} - {{repeticiones}}</h4>
+              <img href='{{ejercicio.foto}}' alt="error" />
+              <p>{{ejercicio.descripcion}}</p>
+            </div>
+          {{/dia7}}
+        </div>
+
       {{/datos.ejercicios}}
     </div>
+
+    <footer>
+      <h2>Cuanto más difícil es la victoria, mayor es la felicidad de ganar.</h2>
+      <h3>Pelé</h3>
+    </footer>
 
 
   </body>

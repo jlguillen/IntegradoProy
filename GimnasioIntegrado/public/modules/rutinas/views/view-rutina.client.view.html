@@ -36,7 +36,12 @@
 		</div>
 	</div>
 
-	<button data-ng-show="((authentication.user.roles[0] === 'admin') || (authentication.user.roles[0] === 'monitor'))" type="button" class="btn btn-danger" name="borrar" data-ng-click="remove();">Borrar</button>
+	<button data-ng-click="pedirPDF(rutina._id);" type="button" name="button">Generar PDF</button>
+
+	<a target="_blank" href="/resources/temp/rutina.pdf" ng-show="muestraBotonPDF">Abrir PDF</a>
+
+
+	<button data-ng-show="((authentication.user.roles[0] === 'admin') || (authentication.user.roles[0] === 'monitor'))" type="button" class="btn btn-danger pull-right" name="borrar" data-ng-click="remove();">Borrar</button>
 
 	<br><br>
 

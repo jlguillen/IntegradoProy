@@ -29,6 +29,8 @@
     "glob": "~4.0.5",
     "grunt-cli": "~0.1.13",
     "helmet": "~0.5.0",
+    "html-pdf": "^1.2.0",
+    "html-to-pdf": "^0.1.11",
     "jxutils": "^0.1.8",
     "lodash": "~2.4.1",
     "method-override": "~2.3.0",

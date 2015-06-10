@@ -109,6 +109,10 @@ exports.createPDF = function(req, res, next, id) {
 
 	var PDF = require('./pdf.js');
 
+	var d = new Date();
+	var stime = d.getTime();
+	var nombreUnico = 'rutina'+stime;
+
 	Rutina.findById(id).exec(function(err, rutina) {
 		if (err){
 			console.log(err);
@@ -122,18 +126,18 @@ exports.createPDF = function(req, res, next, id) {
 			});
 
 		myPDF.renderAsPdf({
-        output: __dirname + '/../views/rutina.pdf'
+        output: __dirname + '/../views/' + nombreUnico + '.pdf'
     }, function (err, data) {
-      console.log('PDF CREADO');
-			res.json(rutina);
+			res.json('rutina.pdf');
     });
 
-
-			//Aquí dentro llamaré a la función pdf.js
-			// res.json(rutina);
 		}
 
 
 	});
+
+
+
+
 
 };

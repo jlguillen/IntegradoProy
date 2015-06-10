@@ -2,8 +2,8 @@
 
 var Fs = require('fs'),
     Mustache = require('mustache'),
-    Phantom = require('phantom'),
-    Utils = require('jxutils');
+    Utils = require('jxutils'),
+    htmlToPdf = require('html-to-pdf');
 
     module.exports = function PDF (options) {
 
@@ -58,38 +58,19 @@ var Fs = require('fs'),
                 // tipo: options.tipo
 
             }, function (err) {
+
                 if (err) { return callback(err); }
-                Phantom.create(function (ph) {
 
-                    ph.createPage(function (page) {
+                var pdf = require('html-pdf');
+                var html = Fs.readFileSync(tmpFileName, 'utf8');
+                var options = { filename: './public/resources/temp/rutina.pdf', format: 'Letter' };
 
-                      page.set('paperSize', {
-                          border: '1cm',
-                           format: 'A4',
-                           orientation: 'portrait',
-                           footer: {
-                              height: '1cm',
-                              contents: ph.callback(function(pageNum, numPages) {
-                                  return '<p style="text-align: center" >' + pageNum + ' / ' + numPages + '</p>';
-                              })
-                          }
+                pdf.create(html, options).toFile(function(err, res) {
+                  if (err) return console.log(err);
+                  Fs.unlink(tmpFileName);
+                  callback.call(this, arguments);
+                });
 
-                      });
-                      page.set('loadImages', true);
-
-                        page.open(tmpFileName, function(status) {
-                            page.render(options.output, function() {
-                                Fs.unlink(tmpFileName);
-                                ph.exit();
-                                callback.call(this, arguments);
-                            });
-                        });
-
-                    });
-                }, {
-                  dnodeOpts: {weak: false}
-                  }
-              );
             });
 
             return self;

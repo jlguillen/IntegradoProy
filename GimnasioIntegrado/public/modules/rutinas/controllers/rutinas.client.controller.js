@@ -9,6 +9,22 @@ angular.module('rutinas').controller('RutinasController', ['$scope', '$statePara
 		$scope.dia = {};
 		$scope.socioUser = {};
 		$scope.hoy = new Date();
+		$scope.muestraBotonPDF = false;
+
+
+		/*
+		*Primero aparece un botón para pedir el pdf, y luego un enlace para verlo, una vez se haya creado.
+		*/
+		$scope.pedirPDF = function(id){
+			$http.get('/PDFRutina/' + id).
+				success(function(respuesta) {
+					$scope.enlacePDF = respuesta;
+					$scope.muestraBotonPDF = true;
+				}).
+				error(function(data, status, headers, config) {
+					console.log('Error petición get /rutinas desde rutinas');
+				});
+		};
 
 		$scope.mostrarSocioCore = function(idSocio){
 			if(Authentication.user){
