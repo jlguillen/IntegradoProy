@@ -7,22 +7,12 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a href="/#!/" class="navbar-brand">
-			<!-- Gimnasio Integrado -->
-			<img alt="brand" src="modules/core/img/logointegral.png">
+		<a id="botonHome" href="/#!/" class="navbar-brand">
+			Gimnasio Integrado
+			<!-- <img alt="brand" src="modules/core/img/logointegralBlanco.png"> -->
 		</a>
 	</div>
 	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
-
-		<!-- Para gente sin logear -->
-		<ul class="nav navbar-nav" data-ng-hide="authentication.user">
-			<li ui-route="/tarifas" ng-class="{active: $uiRoute}">
-				<a href="/#!/tarifas">Ver tarifas</a>
-			</li>
-			<li ui-route="/actividades" ng-class="{active: $uiRoute}">
-				<a href="/#!/actividades">Horario actividades</a>
-			</li>
-		</ul>
 
 		<!-- menú para clientes -->
 		<ul class="nav navbar-nav" data-ng-show="authentication.user.roles[0] === 'cliente'">
